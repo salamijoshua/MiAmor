@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MiAmor - Find Love, Earn Income</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary-color: #3b82f6;
+            --primary-color-dark: #2563eb;
+            --secondary-color: #1e3a8a;
+            --background-dark: #0d1a2e;
+            --background-light: #112240;
+            --text-color: #cdd6f0;
+            --heading-color: #ffffff;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --header-height: 80px;
+        }
+
+        /* General Styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--background-dark); color: var(--text-color); line-height: 1.7; transition: overflow 0.3s ease; }
+        main { padding-top: var(--header-height); }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        section { padding: 100px 0; overflow: hidden; }
+        h1, h2, h3 { color: var(--heading-color); font-weight: 600; line-height: 1.2; margin-bottom: 20px; }
+        h2 { font-size: 2.5rem; text-align: center; }
+        h2::after { content: ''; display: block; width: 60px; height: 4px; background: var(--primary-color); margin: 20px auto 0; border-radius: 2px; }
+        p { margin-bottom: 15px; }
+        .btn { display: inline-block; padding: 12px 28px; background: var(--primary-color); color: var(--heading-color); border: 2px solid transparent; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; cursor: pointer; }
+        .btn:hover { background: transparent; border-color: var(--primary-color); transform: translateY(-3px); }
+        .btn-outline { background: transparent; border: 2px solid var(--primary-color); }
+        .btn-outline:hover { background: var(--primary-color); color: var(--heading-color); }
+
+        /* Header & Navigation */
+        header { position: fixed; top: 0; left: 0; width: 100%; height: var(--header-height); background: rgba(13, 26, 46, 0.8); backdrop-filter: blur(10px); z-index: 1000; display: flex; align-items: center; border-bottom: 1px solid var(--border-color); }
+        nav { display: flex; align-items: center; width: 100%; }
+        .logo { text-decoration: none; }
+        .logo-img { height: 55px; width: auto; vertical-align: middle; }
+        .nav-controls { margin-left: auto; display: flex; align-items: center; }
+        .nav-links { display: flex; align-items: center; list-style: none; }
+        .nav-links li { margin-left: 30px; }
+        .nav-links a { color: var(--text-color); text-decoration: none; font-weight: 500; transition: color 0.3s ease; }
+        .nav-links a:hover { color: var(--primary-color); }
+        .nav-links .btn { padding: 8px 24px; }
+        .menu-toggle { display: none; flex-direction: column; cursor: pointer; gap: 5px; }
+        .menu-toggle .bar { width: 25px; height: 3px; background-color: var(--heading-color); border-radius: 2px; transition: all 0.3s ease; }
+        
+        /* Hero Section */
+        #hero { height: 100vh; min-height: 700px; display: flex; align-items: center; justify-content: center; text-align: center; background-image: radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.3), transparent 40%), radial-gradient(circle at 80% 70%, rgba(30, 58, 138, 0.4), transparent 40%), linear-gradient(160deg, var(--background-dark) 40%, #081220 100%); position: relative; }
+        .hero-content { max-width: 800px; }
+        .hero-logo-container { margin-bottom: 40px; position: relative; display: flex; justify-content: center; align-items: center; }
+        .hero-logo { max-width: 220px; width: 100%; height: auto; position: relative; z-index: 2; }
+        .hero-logo-container::before, .hero-logo-container::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; border: 2px solid var(--primary-color); border-radius: 25px; animation: pulse-wave 3s linear infinite; }
+        .hero-logo-container::after { animation-delay: -1.5s; }
+        @keyframes pulse-wave { 0% { transform: scale(0.95); opacity: 1; box-shadow: 0 0 5px var(--primary-color), inset 0 0 5px var(--primary-color); } 70% { opacity: 0.5; } 100% { transform: scale(1.4); opacity: 0; box-shadow: 0 0 25px var(--primary-color), inset 0 0 15px var(--primary-color); } }
+        #hero h1 { font-size: 3.5rem; font-weight: 700; letter-spacing: 1px; }
+        .hero-hearts { color: var(--primary-color); }
+        #hero p { font-size: 1.2rem; max-width: 600px; margin: 25px auto 40px; }
+        .hero-buttons .btn { margin: 0 10px; }
+
+        /* Packages Section */
+        .package-toggle { text-align: center; margin-bottom: 50px; }
+        .toggle-btn { padding: 10px 20px; font-size: 1rem; font-weight: 600; cursor: pointer; border: 2px solid var(--border-color); background: transparent; color: var(--text-color); transition: all 0.3s ease; }
+        .toggle-btn.plus { border-radius: 30px 0 0 30px; }
+        .toggle-btn.ultra { border-radius: 0 30px 30px 0; }
+        .toggle-btn.active { background: var(--primary-color); color: var(--heading-color); border-color: var(--primary-color); }
+        
+        .package-content-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+        .package-details-list { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 15px; padding: 30px; }
+        .package-detail-item { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid var(--border-color); }
+        .package-detail-item:last-child { border-bottom: none; }
+        .package-detail-item p { margin: 0; font-size: 1rem; }
+        .package-detail-item h3 { margin: 0; font-size: 1.8rem; color: var(--primary-color); font-weight: 700; }
+        .package-cta { margin-top: 30px; text-align: center; }
+        .package-image-container { display: flex; align-items: center; justify-content: center; }
+        
+        /* --- START OF FIX V2 --- */
+        #package-image {
+            width: 100%;
+            /* Removed max-height and object-fit to allow natural aspect ratio */
+            height: auto; /* Ensures height scales with width */
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            opacity: 1;
+            transition: opacity 0.4s ease-in-out;
+            display: block; /* Good practice for images to avoid extra space */
+        }
+        /* --- END OF FIX V2 --- */
+        
+        /* Other Sections */
+        #about { background-color: var(--background-light); }
+        .about-content { text-align: center; max-width: 800px; margin: 0 auto; }
+        #features { background-color: var(--background-light); }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
+        .feature-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 15px; padding: 30px; transition: transform 0.3s ease, box-shadow 0.3s ease; position: relative; cursor: pointer; padding-bottom: 60px; }
+        .feature-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); }
+        .feature-card::after { content: 'Learn More →'; position: absolute; bottom: 25px; left: 30px; color: var(--primary-color); font-weight: 600; opacity: 0; transform: translateX(-10px); transition: all 0.3s ease-in-out; }
+        .feature-card:hover::after { opacity: 1; transform: translateX(0); }
+        .feature-icon { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 15px; }
+        .feature-card h3 { font-size: 1.5rem; color: var(--heading-color); }
+        #register { background: linear-gradient(135deg, var(--secondary-color), var(--primary-color)); }
+        .cta-content { text-align: center; padding: 60px 40px; border-radius: 20px; }
+        .cta-content h2 { color: white; margin-bottom: 20px; }
+        .cta-content h2::after { background: white; }
+        .cta-content p { color: white; max-width: 600px; margin-left: auto; margin-right: auto; margin-bottom: 30px; }
+        .cta-content .btn { background: white; color: var(--primary-color); font-size: 1.1rem; }
+        .cta-content .btn:hover { background: transparent; color: white; border-color: white; }
+        footer { text-align: center; padding: 40px 20px; border-top: 1px solid var(--border-color); background-color: var(--background-light); }
+        footer p { margin: 0; }
+        #modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(5px); z-index: 2000; display: none; justify-content: center; align-items: center; padding: 20px; opacity: 0; transition: opacity 0.3s ease-in-out; }
+        #modal-overlay.active { display: flex; opacity: 1; }
+        .modal-content { background: var(--background-light); padding: 30px; border-radius: 15px; border: 1px solid var(--border-color); max-width: 600px; width: 100%; position: relative; transform: scale(0.9); transition: transform 0.3s ease-in-out; max-height: 90vh; overflow-y: auto; }
+        #modal-overlay.active .modal-content { transform: scale(1); }
+        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 2.5rem; line-height: 1; color: var(--text-color); cursor: pointer; transition: color 0.3s ease; }
+        .close-btn:hover { color: var(--primary-color); }
+
+        /* --- START OF FIX V2 --- */
+        #modal-image {
+            width: 100%;
+            height: auto; /* Ensures height scales with width */
+            /* Removed max-height, object-fit, and background-color */
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: block; /* Good practice for images to avoid extra space */
+        }
+        /* --- END OF FIX V2 --- */
+
+        #modal-title { color: var(--primary-color); font-size: 1.8rem; }
+        #modal-text { line-height: 1.8; }
+        .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+
+        /* Responsive Optimizations */
+        @media (max-width: 850px) {
+            .menu-toggle { display: flex; z-index: 10; }
+            .nav-links { display: none; position: fixed; top: 0; right: 0; width: 70%; max-width: 300px; height: 100vh; background: var(--background-light); flex-direction: column; justify-content: center; align-items: center; transform: translateX(100%); transition: transform 0.3s ease-in-out; border-left: 1px solid var(--border-color); }
+            .nav-links.active { display: flex; transform: translateX(0); }
+            .nav-links li { margin: 20px 0; }
+            .menu-toggle.active .bar:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
+            .menu-toggle.active .bar:nth-child(2) { opacity: 0; }
+            .menu-toggle.active .bar:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
+        }
+        
+        @media (max-width: 768px) {
+            h2 { font-size: 2.1rem; }
+            #hero h1 { font-size: 2.8rem; }
+            #hero p { font-size: 1rem; }
+            .hero-logo { max-width: 180px; }
+            section { padding: 80px 0; }
+            .package-content-wrapper { grid-template-columns: 1fr; gap: 40px; }
+            .package-image-container { order: -1; }
+            .modal-content { padding: 20px; }
+            #modal-title { font-size: 1.5rem; }
+        }
+
+        @media (max-width: 480px) {
+            .logo-img { height: 45px; }
+            h2 { font-size: 1.8rem; }
+            #hero h1 { font-size: 2.2rem; }
+            .hero-logo { max-width: 150px; }
+            .hero-buttons { display: flex; flex-direction: column; align-items: center; }
+            .hero-buttons .btn { margin: 10px 0; width: 80%; }
+            .package-detail-item h3 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#hero" class="logo"><img src="https://res.cloudinary.com/db0fbc9ej/image/upload/v1753737911/IMG-20250728-WA0148df-removebg-preview_1_e7eiqe.png" alt="MiAmor Logo" class="logo-img"></a>
+                <div class="nav-controls">
+                    <ul class="nav-links">
+                        <li><a href="#about">About</a></li><li><a href="#packages">Packages</a></li><li><a href="#features">Features</a></li><li><a href="https://wa.me/2349126281337?text=Hello%2C%20I%20am%20ready%20to%20Register%20on%20MiAmor" class="btn">Register Now</a></li>
+                    </ul>
+                    <div class="menu-toggle"><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero">
+             <div class="container hero-content animate-on-scroll">
+                <div class="hero-logo-container"><img src="https://res.cloudinary.com/db0fbc9ej/image/upload/v1753737911/IMG-20250728-WA0148df-removebg-preview_1_e7eiqe.png" alt="MiAmor Logo" class="hero-logo"></div>
+                <h1>Find Love, Earn Income<br>With MiAmor <span class="hero-hearts">💙</span></h1>
+                <p>A dynamic platform to find love, earn through networking, and gain valuable skills. We foster meaningful connections, financial opportunities, and personal growth.</p>
+                <div class="hero-buttons"><a href="https://wa.me/2349126281337?text=Hello%2C%20I%20am%20ready%20to%20Register%20on%20MiAmor" class="btn">Register Now</a><a href="#packages" class="btn btn-outline">How It Works</a></div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container about-content animate-on-scroll">
+                <h2>What is MiAmor?</h2>
+                <p>MiAmor is a dynamic platform operating across multiple African and foreign countries, designed to help users find love, earn income through networking, and gain valuable skills. It fosters meaningful connections, financial opportunities, and personal growth. MiAmor combines relationship-building with entrepreneurship and skill development, with a strong focus on community and empowerment.</p>
+            </div>
+        </section>
+
+        <section id="packages">
+            <div class="container">
+                <div class="animate-on-scroll">
+                    <h2>How MiAmor Works</h2>
+                    <div class="package-toggle">
+                        <button class="toggle-btn plus active" onclick="showPackage('plus')">Plus Package</button>
+                        <button class="toggle-btn ultra" onclick="showPackage('ultra')">Ultra Package</button>
+                    </div>
+                </div>
+                <div class="package-content-wrapper animate-on-scroll">
+                    <div class="package-details-list">
+                        <div class="package-detail-item"><p>Registration Fee</p><h3 data-key="fee"></h3></div>
+                        <div class="package-detail-item"><p>Welcome Reward</p><h3 data-key="welcome"></h3></div>
+                        <div class="package-detail-item"><p>Referral Bonus</p><h3 data-key="referral"></h3></div>
+                        <div class="package-detail-item"><p>1st Indirect Ref. Bonus</p><h3 data-key="indirect1"></h3></div>
+                        <div class="package-detail-item"><p>2nd Indirect Ref. Bonus</p><h3 data-key="indirect2"></h3></div>
+                        <div class="package-detail-item"><p>Game Modules</p><h3 data-key="games"></h3></div>
+                        <div class="package-detail-item"><p>Matching Add-ons</p><h3 data-key="matching"></h3></div>
+                        <div class="package-detail-item"><p>Open Love Hamper</p><h3 data-key="hamper"></h3></div>
+                        <div class="package-detail-item"><p>Tiktok/FB (5k views)</p><h3 data-key="social"></h3></div>
+                        <div class="package-cta"><a href="https://wa.me/2349126281337?text=Hello%2C%20I%20am%20ready%20to%20Register%20on%20MiAmor" class="btn">Click Here To Register</a></div>
+                    </div>
+                    <div class="package-image-container">
+                        <img id="package-image" src="" alt="MiAmor Package" width="800" height="1000">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features">
+             <div class="container">
+                <h2 class="animate-on-scroll">Platform Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card animate-on-scroll" data-modal-id="cash"><div class="feature-icon">💰</div><h3>Feelings To Cash</h3><p>Every connection, conversation, and spark of love has the power to earn you real cash.</p></div>
+                    <div class="feature-card animate-on-scroll" style="transition-delay: 0.1s;" data-modal-id="gme"><div class="feature-icon">💸</div><h3>GME (Get Matched & Earn)</h3><p>Earn up to $2.5 every time you match or get matched, turning simple swipes into real income.</p></div>
+                    <div class="feature-card animate-on-scroll" style="transition-delay: 0.2s;" data-modal-id="games"><div class="feature-icon">🎮</div><h3>Game Modules</h3><p>Discover diverse games and win big. Every win translates into real earnings you can withdraw.</p></div>
+                    <div class="feature-card animate-on-scroll" style="transition-delay: 0.3s;" data-modal-id="trip"><div class="feature-icon">✈️</div><h3>Love Trip/Tour</h3><p>Lucky couples get an exclusive, all-expenses-paid 5-day romantic getaway to South Africa.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="register">
+            <div class="container">
+                <div class="cta-content animate-on-scroll">
+                    <h2>Ready to Start Your Journey?</h2>
+                    <p>The first thing you do to register on Miamor is to buy a coupon code. The amount you pay for coupon is based on which package you want to go for, whether it’s Plus(₦10,000) or Ultra (₦14,000). The money you pay for coupon automatically covers your registration fee. After getting the coupon you can then proceed to sign up on the platform.</p>
+                    <a href="https://wa.me/2349126281337?text=Hello%2C%20I%20am%20ready%20to%20Register%20or%20Purchase%20coupon%20code%20for%20MiAmor" class="btn">Get Your Coupon Now >>></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container"><p>© 2025 MiAmor. All Rights Reserved. Find Love, Earn Income.</p></div>
+    </footer>
+
+    <div id="modal-overlay">
+        <div class="modal-content">
+            <span class="close-btn">×</span>
+            <img id="modal-image" src="" alt="Feature Image" width="800" height="1000">
+            <h3 id="modal-title"></h3><p id="modal-text"></p>
+        </div>
+    </div>
+
+    <script>
+        // --- DATA OBJECTS ---
+        const modalData = {
+            cash: { title: 'Feelings To Cash', image: 'https://res.cloudinary.com/db0fbc9ej/image/upload/v1753739894/IMG-20250728-WA0159_ndgqvi.jpg', text: 'On MiAmor, we believe that emotional investment should be rewarding. Our innovative "Feelings To Cash" system transforms your interactions into tangible income. Every meaningful conversation you start, every connection you make, and every bond you form contributes to your earnings.' },
+            gme: { title: 'GME (Get Matched & Earn)', image: 'https://res.cloudinary.com/db0fbc9ej/image/upload/v1753739894/IMG-20250728-WA0158_ajloh7.jpg', text: 'Turn your swipes into cash with our Get Matched & Earn (GME) feature. For every match you make, you can earn up to $2.5. This feature makes the process of finding love not just exciting but also financially rewarding.' },
+            games: { title: 'Game Modules', image: 'https://res.cloudinary.com/db0fbc9ej/image/upload/v1753739894/IMG-20250728-WA0157_nctaqr.jpg', text: 'Dive into our diverse collection of interactive games! Whether you enjoy trivia, puzzles, or competitive challenges, there’s something for everyone. Every victory adds to your earnings, which you can withdraw directly to your bank account.' },
+            trip: { title: 'Love Trip/Tour', image: 'https://res.cloudinary.com/db0fbc9ej/image/upload/v1753739894/IMG-20250728-WA0154_ojeagc.jpg', text: 'We celebrate true love found on our platform. For lucky couples who find a genuine, lasting connection, MiAmor offers an unforgettable reward: an exclusive, all-expenses-paid 5-day romantic getaway to South Africa.' }
+        };
+
+        const packageData = {
+            plus: { fee: 10000, welcome: 8000, referral: 9100, indirect1: 200, indirect2: 100, games: 3000, matching: 2000, hamper: 5000, social: 1500, imageUrl: 'https://res.cloudinary.com/db0fbc9ej/image/upload/v1753739894/IMG-20250728-WA0147_gdpll0.jpg' },
+            ultra: { fee: 14000, welcome: 12500, referral: 12500, indirect1: 400, indirect2: 150, games: 5000, matching: 2500, hamper: 10000, social: 2500, imageUrl: 'https://res.cloudinary.com/db0fbc9ej/image/upload/v1753739894/IMG-20250728-WA0146_yyolzs.jpg' }
+        };
+
+        // --- UI ELEMENTS ---
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        const packageDetailItems = document.querySelectorAll('.package-detail-item h3');
+        const packageImage = document.getElementById('package-image');
+        const plusBtn = document.querySelector('.toggle-btn.plus');
+        const ultraBtn = document.querySelector('.toggle-btn.ultra');
+
+        // --- FUNCTIONS ---
+        function animateValue(obj, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const currentVal = Math.floor(progress * (end - start) + start);
+                obj.innerHTML = `₦${currentVal.toLocaleString()}`;
+                if (progress < 1) window.requestAnimationFrame(step);
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        function showPackage(packageName) {
+            const data = packageData[packageName];
+            
+            packageDetailItems.forEach(item => {
+                const key = item.getAttribute('data-key');
+                if (data[key] !== undefined) animateValue(item, 0, data[key], 800);
+            });
+
+            packageImage.style.opacity = 0;
+            setTimeout(() => {
+                packageImage.src = data.imageUrl;
+                packageImage.style.opacity = 1;
+            }, 400);
+
+            plusBtn.classList.toggle('active', packageName === 'plus');
+            ultraBtn.classList.toggle('active', packageName === 'ultra');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => { showPackage('plus'); });
+        
+        menuToggle.addEventListener('click', () => { menuToggle.classList.toggle('active'); navLinks.classList.toggle('active'); });
+
+        const featureCards = document.querySelectorAll('.feature-card');
+        const modalOverlay = document.getElementById('modal-overlay');
+        const modalImageEl = document.getElementById('modal-image');
+        const modalTitle = document.getElementById('modal-title');
+        const modalText = document.getElementById('modal-text');
+        const closeBtn = document.querySelector('.close-btn');
+
+        function openModal(id) {
+            const data = modalData[id];
+            if (!data) return;
+            modalImageEl.src = data.image; modalTitle.textContent = data.title; modalText.innerHTML = data.text;
+            modalOverlay.classList.add('active'); document.body.style.overflow = 'hidden';
+        }
+        function closeModal() {
+            modalOverlay.classList.remove('active'); document.body.style.overflow = 'auto';
+        }
+
+        featureCards.forEach(card => card.addEventListener('click', () => openModal(card.getAttribute('data-modal-id'))));
+        closeBtn.addEventListener('click', closeModal);
+        modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) closeModal(); });
+
+        const scrollElements = document.querySelectorAll(".animate-on-scroll");
+        const elementInView = (el) => el.getBoundingClientRect().top <= window.innerHeight;
+        const displayScrollElement = (el) => el.classList.add("is-visible");
+        const handleScrollAnimation = () => scrollElements.forEach((el) => { if (elementInView(el)) displayScrollElement(el); });
+        window.addEventListener("scroll", handleScrollAnimation);
+        handleScrollAnimation();
+    </script>
+</body>
+</html>
