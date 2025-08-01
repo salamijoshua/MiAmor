@@ -4,12 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Join MiAmor, the dynamic platform to find love, earn income through networking, and gain valuable skills in Nigeria and Africa. Turn connections into cash today!">
-    <title>MiAmor - Find Love, Earn Income</title>
+    <title>MiAmor - Find Love, Earn Income & Register</title>
     
-    <!-- === FAVICON LINKS (NEWLY ADDED) === -->
     <link rel="icon" href="https://res.cloudinary.com/db0fbc9ej/image/upload/v1753737911/IMG-20250728-WA0148df-removebg-preview_1_e7eiqe.png" type="image/png">
     <link rel="apple-touch-icon" href="https://res.cloudinary.com/db0fbc9ej/image/upload/v1753737911/IMG-20250728-WA0148df-removebg-preview_1_e7eiqe.png">
-    <!-- === END OF FAVICON LINKS === -->
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -77,7 +75,6 @@
         .toggle-btn.plus { border-radius: 30px 0 0 30px; }
         .toggle-btn.ultra { border-radius: 0 30px 30px 0; }
         .toggle-btn.active { background: var(--primary-color); color: var(--heading-color); border-color: var(--primary-color); }
-        
         .package-content-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
         .package-details-list { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 15px; padding: 30px; }
         .package-detail-item { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid var(--border-color); }
@@ -86,16 +83,7 @@
         .package-detail-item h3 { margin: 0; font-size: 1.8rem; color: var(--primary-color); font-weight: 700; }
         .package-cta { margin-top: 30px; text-align: center; }
         .package-image-container { display: flex; align-items: center; justify-content: center; }
-        
-        #package-image {
-            width: 100%;
-            height: auto;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            opacity: 1;
-            transition: opacity 0.4s ease-in-out;
-            display: block;
-        }
+        #package-image { width: 100%; height: auto; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); opacity: 1; transition: opacity 0.4s ease-in-out; display: block; }
         
         /* Other Sections */
         #about { background-color: var(--background-light); }
@@ -108,6 +96,20 @@
         .feature-card:hover::after { opacity: 1; transform: translateX(0); }
         .feature-icon { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 15px; }
         .feature-card h3 { font-size: 1.5rem; color: var(--heading-color); }
+        
+        /* FAQ Section (NEW) */
+        #faq { background-color: var(--background-dark); }
+        .faq-container { max-width: 800px; margin: 0 auto; }
+        .faq-item { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 10px; margin-bottom: 15px; }
+        .faq-question { padding: 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .faq-question h3 { margin: 0; font-size: 1.2rem; }
+        .faq-question .toggle-icon { font-size: 1.5rem; transition: transform 0.3s ease; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-in-out, padding 0.3s ease; }
+        .faq-answer p { margin: 0; padding: 0 20px 20px; }
+        .faq-item.active .faq-answer { max-height: 200px; }
+        .faq-item.active .toggle-icon { transform: rotate(45deg); }
+
+        /* CTA & Footer */
         #register { background: linear-gradient(135deg, var(--secondary-color), var(--primary-color)); }
         .cta-content { text-align: center; padding: 60px 40px; border-radius: 20px; }
         .cta-content h2 { color: white; margin-bottom: 20px; }
@@ -123,52 +125,16 @@
         #modal-overlay.active .modal-content { transform: scale(1); }
         .close-btn { position: absolute; top: 15px; right: 20px; font-size: 2.5rem; line-height: 1; color: var(--text-color); cursor: pointer; transition: color 0.3s ease; }
         .close-btn:hover { color: var(--primary-color); }
-
-        #modal-image {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            display: block;
-        }
-        
+        #modal-image { width: 100%; height: auto; border-radius: 10px; margin-bottom: 20px; display: block; }
         #modal-title { color: var(--primary-color); font-size: 1.8rem; }
         #modal-text { line-height: 1.8; }
         .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
         .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
 
         /* Responsive Optimizations */
-        @media (max-width: 850px) {
-            .menu-toggle { display: flex; z-index: 10; }
-            .nav-links { display: none; position: fixed; top: 0; right: 0; width: 70%; max-width: 300px; height: 100vh; background: var(--background-light); flex-direction: column; justify-content: center; align-items: center; transform: translateX(100%); transition: transform 0.3s ease-in-out; border-left: 1px solid var(--border-color); }
-            .nav-links.active { display: flex; transform: translateX(0); }
-            .nav-links li { margin: 20px 0; }
-            .menu-toggle.active .bar:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
-            .menu-toggle.active .bar:nth-child(2) { opacity: 0; }
-            .menu-toggle.active .bar:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
-        }
-        
-        @media (max-width: 768px) {
-            h2 { font-size: 2.1rem; }
-            #hero h1 { font-size: 2.8rem; }
-            #hero p { font-size: 1rem; }
-            .hero-logo { max-width: 180px; }
-            section { padding: 80px 0; }
-            .package-content-wrapper { grid-template-columns: 1fr; gap: 40px; }
-            .package-image-container { order: -1; }
-            .modal-content { padding: 20px; }
-            #modal-title { font-size: 1.5rem; }
-        }
-
-        @media (max-width: 480px) {
-            .logo-img { height: 45px; }
-            h2 { font-size: 1.8rem; }
-            #hero h1 { font-size: 2.2rem; }
-            .hero-logo { max-width: 150px; }
-            .hero-buttons { display: flex; flex-direction: column; align-items: center; }
-            .hero-buttons .btn { margin: 10px 0; width: 80%; }
-            .package-detail-item h3 { font-size: 1.5rem; }
-        }
+        @media (max-width: 850px) { .menu-toggle { display: flex; z-index: 10; } .nav-links { display: none; position: fixed; top: 0; right: 0; width: 70%; max-width: 300px; height: 100vh; background: var(--background-light); flex-direction: column; justify-content: center; align-items: center; transform: translateX(100%); transition: transform 0.3s ease-in-out; border-left: 1px solid var(--border-color); } .nav-links.active { display: flex; transform: translateX(0); } .nav-links li { margin: 20px 0; } .menu-toggle.active .bar:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); } .menu-toggle.active .bar:nth-child(2) { opacity: 0; } .menu-toggle.active .bar:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); } }
+        @media (max-width: 768px) { h2 { font-size: 2.1rem; } #hero h1 { font-size: 2.8rem; } #hero p { font-size: 1rem; } .hero-logo { max-width: 180px; } section { padding: 80px 0; } .package-content-wrapper { grid-template-columns: 1fr; gap: 40px; } .package-image-container { order: -1; } .modal-content { padding: 20px; } #modal-title { font-size: 1.5rem; } }
+        @media (max-width: 480px) { .logo-img { height: 45px; } h2 { font-size: 1.8rem; } #hero h1 { font-size: 2.2rem; } .hero-logo { max-width: 150px; } .hero-buttons { display: flex; flex-direction: column; align-items: center; } .hero-buttons .btn { margin: 10px 0; width: 80%; } .package-detail-item h3 { font-size: 1.5rem; } }
     </style>
     <!-- Schema Markup for SEO -->
     <script type="application/ld+json">
@@ -184,6 +150,39 @@
         "contactType": "customer support",
         "url": "https://miamor-official.ng/"
       }
+    }
+    </script>
+    <!-- FAQ Schema Markup (NEW) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is MiAmor legit?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, MiAmor is a legitimate platform. We operate transparently across multiple countries with a focus on providing real value to our users through meaningful connections, genuine income opportunities via networking, and skill development. Our goal is to foster a trustworthy community for both personal and financial growth."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you make money on MiAmor?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You can make money on MiAmor primarily through our networking and rewards system. This includes earning a significant referral bonus for inviting new members, receiving indirect referral bonuses, and earning through platform activities like our 'Get Matched & Earn' feature and Game Modules. Our packages are designed to reward you for helping our community grow."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I register on MiAmor?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Registering on MiAmor is simple. First, you need to purchase a coupon code for either the Plus or Ultra package. This coupon covers your registration fee. Once you have the code, you can proceed to the sign-up page and complete your registration. You can get your coupon code by clicking any 'Register Now' button on our site."
+          }
+        }
+      ]
     }
     </script>
 </head>
@@ -270,6 +269,43 @@
                 </div>
             </div>
         </section>
+
+        <!-- NEW FAQ SECTION -->
+        <section id="faq">
+            <div class="container">
+                <div class="faq-container animate-on-scroll">
+                    <h2>Frequently Asked Questions</h2>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Is MiAmor legit?</h3>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes, MiAmor is a legitimate platform. We operate transparently across multiple countries with a focus on providing real value to our users through meaningful connections, genuine income opportunities via networking, and skill development. Our goal is to foster a trustworthy community for both personal and financial growth.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>How do you make money on MiAmor?</h3>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>You can make money on MiAmor primarily through our networking and rewards system. This includes earning a significant referral bonus for inviting new members, receiving indirect referral bonuses, and earning through platform activities like our 'Get Matched & Earn' feature and Game Modules. Our packages are designed to reward you for helping our community grow.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>How do I register on MiAmor?</h3>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Registering on MiAmor is simple. First, you need to purchase a coupon code for either the Plus or Ultra package. This coupon covers your registration fee. Once you have the code, you can proceed to the sign-up page and complete your registration. You can get your coupon code by clicking any 'Register Now' button on our site.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <footer>
@@ -353,7 +389,7 @@
             const data = modalData[id];
             if (!data) return;
             modalImageEl.src = data.image; 
-            modalImageEl.alt = data.alt; // Set the dynamic alt text
+            modalImageEl.alt = data.alt;
             modalTitle.textContent = data.title; 
             modalText.innerHTML = data.text;
             modalOverlay.classList.add('active'); 
@@ -374,6 +410,19 @@
         const handleScrollAnimation = () => scrollElements.forEach((el) => { if (elementInView(el)) displayScrollElement(el); });
         window.addEventListener("scroll", handleScrollAnimation);
         handleScrollAnimation();
+
+        // FAQ Accordion Logic
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                const currentlyActive = document.querySelector('.faq-item.active');
+                if (currentlyActive && currentlyActive !== item) {
+                    currentlyActive.classList.remove('active');
+                }
+                item.classList.toggle('active');
+            });
+        });
     </script>
 </body>
-</html>
+        </html>
