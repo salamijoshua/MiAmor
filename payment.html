@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Payment | MiAmor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #02040a;
+            --background-dark: #04091A;
+            --card-background: rgba(10, 25, 47, 0.75);
+            --border-color: rgba(0, 242, 254, 0.2);
+            --neon-cyan: #00f2fe;
+            --neon-blue: #2c72ff;
+            --text-light: #f0f4f8;
+            --text-muted: #a9b7d1;
+            --success-color: #28a745;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            background-image: radial-gradient(circle at top left, rgba(44, 114, 255, 0.1), transparent 40%),
+                              radial-gradient(circle at bottom right, rgba(0, 242, 254, 0.1), transparent 40%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem 1rem;
+        }
+
+        .payment-container { width: 100%; max-width: 480px; }
+
+        .payment-card {
+            background: var(--card-background);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(12px);
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        /* --- NEW: LOGO & GATEWAY LABEL STYLES --- */
+        .logo { max-width: 120px; margin-bottom: 0.5rem; transition: transform 0.3s ease; }
+        .logo:hover { transform: scale(1.05); }
+        .gateway-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 1.5rem;
+        }
+
+        h2 { font-size: 1.8rem; margin-bottom: 0.5rem; font-weight: 700; background: linear-gradient(90deg, var(--neon-cyan), var(--neon-blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        
+        .header-note { color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.95rem; }
+
+        .summary-box, .payment-details-box { background: var(--background-dark); border: 1px solid var(--border-color); border-radius: 12px; padding: 1.5rem; text-align: left; margin-bottom: 1.5rem; }
+
+        .summary-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; font-size: 0.95rem; }
+        .summary-row:last-child { margin-bottom: 0; }
+        .summary-label { color: var(--text-muted); }
+        .summary-value { font-weight: 600; color: var(--text-light); word-break: break-all; }
+        #package-price { color: var(--neon-cyan); font-size: 1.1rem; }
+
+        .payment-details-box h3 { text-align: center; margin-bottom: 1.5rem; font-weight: 500; color: var(--text-muted); }
+        .detail-item { margin-bottom: 1.25rem; }
+        .detail-item label { display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+        
+        .detail-value { display: flex; align-items: center; justify-content: space-between; background-color: var(--primary-color); border: 1px solid var(--border-color); border-radius: 8px; padding: 4px 4px 4px 15px; }
+        .detail-value span { font-weight: 600; font-size: 1rem; }
+        .copy-btn { padding: 8px 15px; border: none; background-color: var(--neon-blue); color: var(--text-light); border-radius: 5px; cursor: pointer; font-weight: 500; transition: all 0.2s ease; }
+        .copy-btn:hover { background-color: var(--neon-cyan); color: var(--background-dark); }
+        
+        .detail-input { width: 100%; background-color: var(--primary-color); border: 1px solid var(--border-color); border-radius: 8px; padding: 12px 15px; font-weight: 600; font-size: 1rem; color: var(--text-light); font-family: 'Poppins', sans-serif; }
+
+        .timer-text { text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
+        #countdown-timer { font-weight: 600; font-size: 1rem; color: var(--neon-cyan); margin-left: 5px; }
+        
+        .form-group { text-align: left; margin-bottom: 1.5rem; }
+        .form-group label { display: block; font-weight: 500; margin-bottom: 0.5rem; color: var(--text-muted); }
+        
+        .search-select-wrapper { position: relative; }
+        .search-select-display { width: 100%; padding: 14px 18px; background-color: var(--background-dark); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-light); font-size: 1rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .search-select-display:after { content: "▼"; font-size: 0.8rem; color: var(--neon-cyan); transition: transform 0.3s ease; }
+        .search-select-wrapper.open .search-select-display:after { transform: rotate(180deg); }
+        .search-select-dropdown { position: absolute; top: calc(100% + 8px); left: 0; right: 0; background: var(--background-dark); border: 1px solid var(--border-color); border-radius: 8px; z-index: 100; max-height: 250px; overflow-y: auto; display: none; }
+        .search-select-wrapper.open .search-select-dropdown { display: block; }
+        #bank-search-input { width: 100%; padding: 12px; border: none; border-bottom: 1px solid var(--border-color); background: var(--primary-color); color: var(--text-light); font-size: 1rem; }
+        #bank-search-input:focus { outline: none; border-bottom-color: var(--neon-cyan); }
+        #bank-list-container { padding: 5px 0; }
+        .bank-option { padding: 12px 18px; cursor: pointer; transition: background-color 0.2s ease; }
+        .bank-option:hover { background-color: rgba(0, 242, 254, 0.1); }
+
+        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 15px 40px; border-radius: 50px; font-weight: 600; text-decoration: none; transition: all 0.3s ease; border: none; cursor: pointer; font-size: 1.1rem; }
+        .btn-primary { background: linear-gradient(90deg, var(--neon-blue), var(--neon-cyan)); color: var(--text-light); }
+        .btn:disabled { opacity: 0.7; cursor: not-allowed; }
+        
+        .loader { width: 18px; height: 18px; border: 2px solid #FFF; border-bottom-color: transparent; border-radius: 50%; display: inline-block; animation: spin 1s linear infinite; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        @media (max-width: 600px) {
+            body { padding: 1rem 0.5rem; align-items: flex-start; min-height: 100%; }
+            .payment-container { margin: 1rem 0; }
+            .payment-card { padding: 1.25rem 1rem; border-radius: 15px; }
+            .logo { max-width: 100px; }
+            .gateway-label { font-size: 0.8rem; margin-bottom: 1rem; }
+            h2 { font-size: 1.5rem; }
+            .header-note { margin-bottom: 1rem; font-size: 0.9rem; }
+            .summary-box, .payment-details-box, .timer-text, .form-group { margin-bottom: 1rem; }
+            .summary-box, .payment-details-box { padding: 1rem; }
+            .summary-row { font-size: 0.9rem; margin-bottom: 0.75rem; }
+            #package-price { font-size: 1rem; }
+            .detail-item { margin-bottom: 1rem; }
+            .detail-input, .search-select-display, .detail-value span { font-size: 0.9rem; }
+            .copy-btn { padding: 6px 12px; font-size: 0.85rem; }
+            .btn { font-size: 1rem; padding: 12px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="payment-container">
+        <div class="payment-card" id="payment-gateway">
+            <!-- NEW: LOGO & GATEWAY TEXT ADDED -->
+            <a href="miamor.html"><img src="assets/logo.png" alt="MiAmor Logo" class="logo"></a>
+            <p class="gateway-label">Payment Gateway</p>
+            
+            <h2>Complete Your Payment</h2>
+            <p class="header-note">Your account will be activated once payment is confirmed.</p>
+
+            <div class="summary-box">
+                <div class="summary-row">
+                    <span class="summary-label">Package:</span>
+                    <span class="summary-value" id="package-name">--</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Amount to Pay:</span>
+                    <span class="summary-value" id="package-price">--</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Sender Email:</span>
+                    <span class="summary-value" id="user-email">--</span>
+                </div>
+            </div>
+
+            <div class="payment-details-box">
+                <h3>Transfer to the account below</h3>
+                <div class="detail-item">
+                    <label>Account Number</label>
+                    <div class="detail-value">
+                        <span id="account-number">9040961001</span>
+                        <button class="copy-btn" data-copy-target="account-number">Copy</button>
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <label>Bank</label>
+                    <input type="text" class="detail-input" value="Moniepoint MFB" readonly>
+                </div>
+                <div class="detail-item">
+                    <label>Account Name</label>
+                    <input type="text" class="detail-input" value="SALAMI FAITH" readonly>
+                </div>
+            </div>
+            
+            <p class="timer-text">Account will expire in <span id="countdown-timer">30:00</span></p>
+
+            <form id="payment-confirmation-form">
+                <div class="form-group">
+                    <label for="bank-search-input">Select the bank you're sending from</label>
+                    <div class="search-select-wrapper">
+                        <div class="search-select-display" id="selected-bank-display">Select your bank...</div>
+                        <div class="search-select-dropdown">
+                            <input type="text" id="bank-search-input" placeholder="Search for your bank...">
+                            <div id="bank-list-container"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">I have made payment</button>
+            </form>
+        </div>
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    const packageData = {
+        'plus': { name: 'MiAmor Plus', price: '₦10,000' },
+        'ultra': { name: 'MiAmor Ultra', price: '₦14,000' }
+    };
+
+    const nigerianBanks = ["Moniepoint MFB", "Access Bank", "UBA", "GTBank", "First Bank", "Zenith Bank", "Kuda MFB", "Palmpay", "Ecobank", "Fidelity Bank", "FCMB", "Union Bank", "Sterling Bank", "Wema Bank", "Stanbic IBTC Bank", "Polaris Bank", "Keystone Bank", "VFD MFB", "Globus Bank", "Citibank", "9Payment Service Bank", "AAA Finance", "AB Microfinance Bank", "ABSU MFB", "ABU Microfinance Bank", "Above Only MFB", "Abulesoro MFB", "Accion MFB", "Accelerex Network", "Access Yello", "AccessMobile", "Ada MFB", "Addosser MFB", "Adeyemi College Staff MFB", "Advans La Fayette MFB", "Afekhafe MFB", "Afemai MFB", "AG Mortgage Bank", "Aku MFB", "Akuchuckwu MFB", "Alekun MFB", "Alert MFB", "Al-Hayat MFB", "AL-Barakah MFB", "Ally MFB", "Alpha Kapital MFB", "Alvana MFB", "Amac MFB", "Amegy MFB", "AMML MFB", "Ampersand MFB", "Amoye MFB", "Amucha MFB", "Amju Unique MFB", "Anchorage MFB", "Aniocha MFB", "Apeks MFB", "Apple MFB", "Arise MFB", "Aramoko MFB", "ASOSavings & Loans", "Aspire MFB", "AssetMatrix MFB", "Assets MFB", "Astrapolaris MFB", "Auchi MFB", "Ave Maria MFB", "Awacash MFB", "Aztec MFB", "Babura MFB", "Baines Credit MFB", "Balera MFB", "Balogun Fulani MFB", "Balogun Gambari MFB", "Banc Corp MFB", "BC Kash MFB", "Berachah MFB", "Beststar MFB", "BIPC MFB", "BishopGate MFB", "BluePrint Investments MFB", "Boji MFB", "BOI MFB", "Boctrust MFB", "Borgu MFB", "Bosak MFB", "Bowen MFB", "Branch International", "Brethren MFB", "Brent Mortgage Bank", "Bridgeway MFB", "Brightway MFB", "Briyth-Covenant MFB", "Broadview MFB", "Bunkure MFB", "Business Support MFB", "Canaan MFB", "Caretaker MFB", "CashConnect MFB", "Cashbridge MFB", "Cashrite MFB", "Catland MFB", "Cedar MFB", "Cellulant", "CEMCS MFB", "Central Bank of Nigeria", "Changan RTS MFB", "Chase MFB", "Chikum MFB", "Chukwunenye MFB", "Cintrust MFB", "CIT MFB", "Coastline MFB", "Coalcamp MFB", "Confidence MFB", "Conpro MFB", "Consistent Trust MFB", "Consumer MFB", "Coop Mortgage Bank", "Corestep MFB", "Coronation Merchant Bank", "Covenant MFB", "Credit Afrique MFB", "Creditville MFB", "Crescent MFB", "Crowdforce", "CS Advance", "Cyberspace", "DAL MFB", "Davodani MFB", "Daylight MFB", "Delta Trust MFB", "Dignity Finance", "Diobu MFB", "Eagle Flight MFB", "Eartholeum", "e-Barcs MFB", "Ecobank Xpress Account", "EcoMobile", "EdFin MFB", "E-Finance", "Egwafin MFB", "eNaira", "Ekondo MFB", "EK-Reliable MFB", "Emeralds MFB", "Empire trust MFB", "Enco Finance", "Enrich MFB", "Enterprise Bank", "Esan MFB", "Eso-E MFB", "eTranzact", "Evangel MFB", "Evergreen MFB", "EWT MFB", "Excellent MFB", "Eyowo", "FairMoney MFB", "FBN Mortgages", "FBNQUEST Merchant Bank", "FBNMobile", "FCMB Easy Account", "FCT MFB", "Fedeth MFB", "FedPoly Nasarawa MFB", "Federal University Dutse MFB", "FET", "FEWCHORE FINANCE", "FHA Mortgage Bank", "Fidfund MFB", "Fidelity Mobile", "FIMS MFB", "FinaTrust MFB", "Firmus MFB", "First Apple", "First Generation Mortgage Bank", "First Midas MFB", "First Option MFB", "First Royal MFB", "Flourish MFB", "Flutterwave", "Fortis MFB", "FortisMobile", "FFS MFB", "FSDH Merchant Bank", "Fullrange MFB", "Fundquest Financial Services", "Futo MFB", "Gabasawa MFB", "Gabsyn MFB", "Gashua MFB", "Gateway Mortgage Bank", "Gbede MFB", "Giant Stride MFB", "Gidauniyar Alheri MFB", "Giginya MFB", "Girei MFB", "Global Initiative MFB", "Glory MFB", "GMB MFB", "GoMoney", "GOLDMAN MFB", "Gombe MFB", "Good Neigbours MFB", "Goodnews MFB", "Gowans MFB", "Green Energy MFB", "GreenBank MFB", "Greenville MFB", "Greenwich Merchant Bank", "Grooming MFB", "GTI MFB", "GTMobile", "Hackman MFB", "Haggai Mortgage Bank", "Halal Credit MFB", "Hasal MFB", "Headway MFB", "Hedonmark", "Heritage Bank", "HighStreet MFB", "Homebase Mortgage Bank", "HopePSB", "IBA MFB", "IBILE MFB", "IBOLO MFB", "Ibu-Aje MFB", "Iboma Fadama MFB", "Ijebu-Ife MFB", "Ikenne MFB", "Ikire MFB", "Ikoyi-Osun MFB", "Ilaro Poly MFB", "Ilisan MFB", "Imo State MFB", "Imperial Homes Mortgage Bank", "Infinity MFB", "Infinity Trust Mortgage Bank", "Innovectives Kesh", "Interland MFB", "Interswitch", "Intellifin", "IRL MFB", "Isaleoyo MFB", "Island MFB", "Iwade MFB", "Iwoama MFB", "Iyamoye MFB", "Iyin Ekiti MFB", "Iyeru Okin MFB", "Jaiz Bank", "Jessefield MFB", "Jubilee-Life Mortgage Bank", "KadPoly MFB", "Kayvee MFB", "KC MFB", "KCMB MFB", "Kegow (Chamsmobile)", "Kenechukwu MFB", "KKU MFB", "Kontagora MFB", "Kopo Kope MFB", "Lagos Building Investment", "Lapo MFB", "Lavender MFB", "Leadcity MFB", "Leadremit", "Legend MFB", "Lifegate MFB", "Light MFB", "Lobrem MFB", "Lotus Bank", "Lovonus MFB", "Lukefield Finance", "MAB Allianz MFB", "Mabinas MFB", "Macrod MFB", "Madobi MFB", "Mainland MFB", "Mainstreet MFB", "Maintrust MFB", "Malachy MFB", "Maritime MFB", "MayFair MFB", "MayFresh Mortgage Bank", "Medef MFB", "Megapraise MFB", "Mercury MFB", "Michael Okpara UniAgric MFB", "Microbiz MFB", "Microcred MFB", "Midland MFB", "MINJIBIR MFB", "MintFinex MFB", "Mkobo MFB", "Mkudi", "MoMo PSB", "Money Trust MFB", "MoneyBox", "Molusi MFB", "Moyofade MFB", "Mutual Benefits MFB", "Mutual Trust MFB", "Nagarta MFB", "Nassarawa MFB", "Navy MFB", "Ndiorah MFB", "Neptune MFB", "New Dawn MFB", "New Golden Pastures MFB", "New Prudential Bank", "NEXIM Bank", "NIP Virtual Bank", "NIRSAL MFB", "Nnew Women MFB", "NowNow", "NPF MFB", "Nsehe MFB", "Nsuk MFB", "Numo MFB", "Nuture MFB", "Nwannegadi MFB", "OAU MFB", "Oche MFB", "Odoakpu MFB", "Ohafia MFB", "Ohha MFB", "Ojokoro MFB", "Oke-Aro Oredegbe MFB", "Okengwe MFB", "Okpoga MFB", "Okuku MFB", "Olabisi Onabanjo University MFB", "Olofin Owena MFB", "Olowolagba MFB", "Oluchukwu MFB", "Omoluabi savings and loans", "Omiye MFB", "One Finance", "Optimus Bank", "Oraukwu MFB", "Orisun MFB", "Orokam MFB", "Oscotech MFB", "Otech MFB", "Otuo MFB", "Oyan MFB", "Page Financials", "Paga", "Parallex Bank", "Parkway-ReadyCash", "PatrickGold MFB", "PayAttitude Online", "Paystack", "PecanTrust MFB", "Pennywise MFB", "Personal Trust MFB", "Petra MFB", "Pillar MFB", "Platinum Mortgage Bank", "Polybadan MFB", "Polyunwana MFB", "Premium Trust Bank", "Preeminent MFB", "Prestige MFB", "Pristine Divitis MFB", "Projects MFB", "Prophius", "Prosperity MFB", "Providus Bank", "Purplemoney MFB", "Pyramid MFB", "Qube MFB", "Quickfund MFB", "Rand Merchant Bank", "Randalpha MFB", "Rayyan MFB", "Refuge Mortgage Bank", "Regent MFB", "Rehoboth MFB", "Reliance MFB", "RenMoney MFB", "Rephidim MFB", "Richway MFB", "Rigo MFB", "RIMA Growth Pathway MFB", "Rockshield MFB", "Royal Blue MFB", "Royal Exchange MFB", "Safe Haven MFB", "SafeTrust", "Sagamu MFB", "SageGrey Finance", "SEAP MFB", "Seed Capital MFB", "Seedvest MFB", "Shalom MFB", "Shepherd Trust MFB", "Shield MFB", "Shongom MFB", "Signature Bank", "Simple Finance", "SmartCash PSB", "Snow MFB", "Solid Allianze MFB", "Solidrock MFB", "Source MFB", "Sparkle", "Standard Chartered", "Stanford MFB", "Stateside MFB", "STB Mortgage Bank", "Stellas MFB", "SULSPAP MFB", "SunTrust Bank", "Suntop MFB", "Supreme MFB", "TAJBank", "Tanadi MFB", "Tangale MFB", "Tasued MFB", "TCF MFB", "Teamapt", "TeasyMobile", "Tekla Finance", "Think Finance MFB", "Titan Trust Bank", "Total Trust MFB", "Trident MFB", "Trinity Financial Services", "TripleA MFB", "Trust MFB", "Trustbond Mortgage Bank", "Trustfund MFB", "U & C MFB", "UDA MFB", "Uhuru MFB", "Ummah MFB", "Umuchukwu MFB", "UNAAB MFB", "Uniben MFB", "Unical MFB", "Unifund MFB", "Unimaid MFB", "Union Bank", "UniUyo MFB", "Unity Bank", "UNN MFB", "Vale Finance", "Vas2nets", "Verdant MFB", "Verite MFB", "Visa MFB", "Virtue MFB", "VTNetworks", "Waya MFB", "Wetland MFB", "Xslnce MFB", "YCT MFB", "Yes MFB", "Yobe MFB", "Zenith Eazy Wallet", "ZenithMobile", "Zikora MFB"];
+
+    const gateway = document.getElementById('payment-gateway');
+    const urlParams = new URLSearchParams(window.location.search);
+    const selectedPackageKey = urlParams.get('package');
+    const userEmail = urlParams.get('email');
+    const selectedPackageData = packageData[selectedPackageKey];
+
+    if (selectedPackageData && userEmail) {
+        document.getElementById('package-name').textContent = selectedPackageData.name;
+        document.getElementById('package-price').textContent = selectedPackageData.price;
+        document.getElementById('user-email').textContent = userEmail;
+    } else {
+        gateway.innerHTML = `<h2>Invalid Session</h2><p>Please <a href="register.html" style="color: var(--neon-cyan);">return to the registration page</a> and start over.</p>`;
+        return;
+    }
+
+    const timerEl = document.getElementById('countdown-timer');
+    let timeInSeconds = 30 * 60;
+    const countdownInterval = setInterval(() => {
+        timeInSeconds--;
+        const minutes = Math.floor(timeInSeconds / 60).toString().padStart(2, '0');
+        const seconds = (timeInSeconds % 60).toString().padStart(2, '0');
+        timerEl.textContent = `${minutes}:${seconds}`;
+        if (timeInSeconds <= 0) {
+            clearInterval(countdownInterval);
+            document.querySelector('.timer-text').innerHTML = "<p style='color: #ff4d4d; font-size: 1rem;'>Payment window has expired. Please restart the registration.</p>";
+            document.querySelector('button[type="submit"]').disabled = true;
+        }
+    }, 1000);
+
+    document.querySelectorAll('.copy-btn').forEach(button => {
+        button.addEventListener('click', (e) => { e.preventDefault(); const targetId = button.dataset.copyTarget; const textToCopy = document.getElementById(targetId).textContent; navigator.clipboard.writeText(textToCopy).then(() => { button.textContent = 'Copied!'; setTimeout(() => { button.textContent = 'Copy'; }, 2000); }); });
+    });
+
+    const bankWrapper = document.querySelector('.search-select-wrapper');
+    const bankDisplay = document.getElementById('selected-bank-display');
+    const bankSearchInput = document.getElementById('bank-search-input');
+    const bankListContainer = document.getElementById('bank-list-container');
+    let selectedBank = null;
+
+    nigerianBanks.forEach(bank => { const option = document.createElement('div'); option.classList.add('bank-option'); option.textContent = bank; option.dataset.value = bank; bankListContainer.appendChild(option); });
+
+    bankDisplay.addEventListener('click', () => { bankWrapper.classList.toggle('open'); if (bankWrapper.classList.contains('open')) { setTimeout(() => { bankSearchInput.focus(); }, 100); } });
+
+    bankSearchInput.addEventListener('keyup', () => { const filter = bankSearchInput.value.toUpperCase(); document.querySelectorAll('.bank-option').forEach(option => { if (option.textContent.toUpperCase().indexOf(filter) > -1) { option.style.display = ""; } else { option.style.display = "none"; } }); });
+
+    bankListContainer.addEventListener('click', (e) => { if (e.target.classList.contains('bank-option')) { selectedBank = e.target.dataset.value; bankDisplay.textContent = selectedBank; bankWrapper.classList.remove('open'); } });
+    
+    document.addEventListener('click', (e) => { if (!bankWrapper.contains(e.target)) { bankWrapper.classList.remove('open'); } });
+
+    const confirmationForm = document.getElementById('payment-confirmation-form');
+    confirmationForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        if (!selectedBank) {
+            alert('Please select the bank you sent the money from.');
+            return;
+        }
+        
+        const submitButton = confirmationForm.querySelector('button[type="submit"]');
+        submitButton.disabled = true;
+        submitButton.innerHTML = `<span class="loader"></span> Confirming...`;
+
+        // --- UPDATED: REDIRECT TO WHATSAPP ---
+        setTimeout(() => {
+            const phoneNumber = '2348088595945';
+            const message = 'Hello, I have made payment on MiAmor Payment gateway, How can I start!';
+            const encodedMessage = encodeURIComponent(message);
+            
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+            
+            // Redirect the user to WhatsApp
+            window.location.href = whatsappUrl;
+
+        }, 1500); // 1.5-second delay to show loader
+    });
+
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MiAmor | Match, Earn & Find Love Across Africa</title>
+    
+    <!-- NEW: FAVICON LINKS ADDED -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+    <link rel="shortcut icon" href="assets/favicon.ico">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family/Poppins:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #02040a;
+            --background-dark: #04091A;
+            --card-background: rgba(10, 25, 47, 0.6);
+            --border-color: rgba(0, 242, 254, 0.2);
+            --neon-cyan: #00f2fe;
+            --neon-blue: #2c72ff;
+            /* UPDATED: Added a pink color for the love theme */
+            --neon-pink: #ff4081; 
+            --skeleton-pink-bg: rgba(255, 64, 129, 0.2);
+            --text-light: #f0f4f8;
+            --text-muted: #a9b7d1;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            line-height: 1.7;
+            overflow-x: hidden;
+            background-image: radial-gradient(circle at top left, rgba(44, 114, 255, 0.1), transparent 30%),
+                              radial-gradient(circle at bottom right, rgba(0, 242, 254, 0.1), transparent 30%);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        
+        h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
+        h2 { font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: 2rem; text-align: center; }
+        h3 { font-size: 1.8rem; margin-bottom: 1rem; color: var(--text-light); }
+        h4 { font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--text-light); }
+
+        h2 .highlight {
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+
+        .section-title-wrapper { margin-bottom: 4rem; }
+        .section-title-wrapper p { max-width: 700px; margin: 1rem auto 0; text-align: center; color: var(--text-muted); }
+        p { margin-bottom: 1rem; color: var(--text-muted); }
+        section { padding: 6rem 0; overflow: hidden; position: relative; }
+        .section-bg { background-color: var(--background-dark); }
+
+        .btn { display: inline-block; padding: 14px 40px; border-radius: 50px; font-weight: 600; text-decoration: none; transition: all 0.3s ease; border: none; cursor: pointer; position: relative; text-align: center; font-size: 1rem; z-index: 1; }
+        .btn-primary { background: linear-gradient(90deg, var(--neon-blue), var(--neon-cyan)); color: var(--text-light); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); }
+        .btn-primary::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: inherit; border-radius: 50px; filter: blur(15px); opacity: 0.7; z-index: -1; transition: opacity 0.3s ease; }
+        .btn-primary:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); }
+        .btn-primary:hover::before { opacity: 1; }
+
+        .section-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        .section-image { width: 100%; height: auto; border-radius: 20px; border: 1px solid var(--border-color); object-fit: cover; transition: transform 0.4s ease, box-shadow 0.4s ease; }
+        .section-image:hover { transform: scale(1.03); box-shadow: 0 0 40px rgba(44, 114, 255, 0.3); }
+
+        #main-header { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; padding: 15px 0; background: rgba(4, 9, 26, 0.8); backdrop-filter: blur(12px); transition: all 0.3s ease; border-bottom: 1px solid var(--border-color); }
+        .header-content { display: flex; justify-content: space-between; align-items: center; }
+        .header-right { display: flex; align-items: center; gap: 1.5rem; }
+        .logo img { max-height: 50px; display: block; transition: transform 0.3s ease; }
+        .logo:hover img { transform: scale(1.05); }
+        .main-nav ul { list-style: none; display: flex; gap: 35px; }
+        .main-nav a { color: var(--text-muted); text-decoration: none; font-weight: 500; position: relative; transition: color 0.3s ease; padding-bottom: 5px; }
+        .main-nav a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: 0px; left: 50%; transform: translateX(-50%); background: linear-gradient(90deg, var(--neon-cyan), var(--neon-blue)); transition: width 0.3s ease; }
+        .main-nav a:hover, .main-nav a.active { color: var(--text-light); }
+        .main-nav a:hover::after, .main-nav a.active::after { width: 100%; }
+        #mobile-menu-toggle { display: none; flex-direction: column; justify-content: space-around; width: 30px; height: 25px; background: transparent; border: none; cursor: pointer; padding: 0; z-index: 1001; }
+        #mobile-menu-toggle span { width: 30px; height: 3px; background: var(--text-light); border-radius: 10px; transition: all 0.3s linear; position: relative; transform-origin: 1px; }
+        #mobile-menu-toggle.open span:nth-child(1) { transform: rotate(45deg); }
+        #mobile-menu-toggle.open span:nth-child(2) { opacity: 0; transform: translateX(20px); }
+        #mobile-menu-toggle.open span:nth-child(3) { transform: rotate(-45deg); }
+
+        #hero { min-height: 100vh; display: grid; align-items: center; position: relative; padding: 140px 0 60px; box-sizing: border-box; }
+        .hero-grid { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 3rem; position: relative; z-index: 2; }
+        .hero-content { text-align: left; }
+        .hero-content h1 { font-weight: 900; background: linear-gradient(90deg, var(--text-light) 0%, var(--neon-cyan) 50%, var(--neon-blue) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-fill-color: transparent; text-shadow: 0 0 40px rgba(0, 242, 254, 0.4); }
+        .hero-content .subtitle { font-size: 1.25rem; margin: 2rem 0 2.5rem; color: var(--text-muted); max-width: 550px; }
+        .hero-social-proof { margin-top: 3rem; display: flex; flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+        .user-avatars { display: flex; align-items: center; }
+        .user-avatars .avatars { display: flex; }
+        .user-avatars img { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--primary-color); margin-left: -15px; transition: transform 0.2s ease; object-fit: cover; }
+        .user-avatars img:hover { transform: translateY(-4px); }
+        .user-avatars img:first-child { margin-left: 0; }
+        .user-avatars .label { margin-left: 1rem; color: var(--text-muted); font-weight: 500; }
+        .store-badges { display: flex; gap: 1rem; }
+        .store-badges a { display: inline-block; transition: transform 0.2s ease; }
+        .store-badges a:hover { transform: scale(1.05); }
+        .store-badges img { height: 45px; }
+
+        .hero-bg-shapes { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1; }
+        .hero-bg-shapes .shape { position: absolute; border-radius: 50%; background: radial-gradient(circle, rgba(0, 242, 254, 0.15), transparent 60%); animation: float-anim-bg 20s infinite ease-in-out; }
+        .hero-bg-shapes .shape.shape-1 { width: 300px; height: 300px; top: 10%; left: 5%; animation-duration: 25s; }
+        .hero-bg-shapes .shape.shape-2 { width: 200px; height: 200px; bottom: 15%; right: 10%; background: radial-gradient(circle, rgba(44, 114, 255, 0.15), transparent 60%); animation-duration: 18s; animation-delay: 2s; }
+        .hero-bg-shapes .shape.shape-3 { width: 150px; height: 150px; top: 20%; right: 20%; animation-duration: 22s; animation-delay: 4s; }
+        @keyframes float-anim-bg { 0% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-30px) rotate(180deg); } 100% { transform: translateY(0) rotate(360deg); } }
+        
+        /* --- UPGRADED MOCKUP & ANIMATION --- */
+        .mockup-animation-container { position: relative; } 
+        .coded-mockup-wrapper { display: flex; justify-content: center; align-items: center; }
+        .coded-mockup { width: 100%; max-width: 270px; aspect-ratio: 9 / 19.5; background-color: rgba(10, 25, 47, 0.5); border: 1px solid var(--border-color); border-radius: 40px; padding: 12px; backdrop-filter: blur(10px); }
+        .mockup-screen { width: 100%; height: 100%; background-color: var(--background-dark); border-radius: 28px; display: flex; flex-direction: column; padding: 15px; overflow: hidden; }
+        .mockup-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-shrink: 0;}
+        .mockup-logo { width: 70px; height: auto; }
+        .mockup-profile { width: 28px; height: 28px; background-color: rgba(0, 242, 254, 0.1); border-radius: 50%; }
+        
+        .skeleton { background-color: rgba(0, 242, 254, 0.1); border-radius: 4px; animation: skeleton-pulse 1.5s infinite ease-in-out; }
+        .skeleton.skeleton-pink { background-color: var(--skeleton-pink-bg); } 
+        @keyframes skeleton-pulse { 0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; } }
+        
+        .mockup-balance-card { padding: 15px; text-align: center; border: 1px solid var(--border-color); border-radius: 15px; background: var(--card-background); }
+        .skeleton.text-sm { height: 10px; width: 60%; margin: 0 auto 10px; }
+        .skeleton.text-lg { height: 28px; width: 80%; margin: 0 auto 8px; }
+        .skeleton.text-md { height: 12px; width: 40%; margin: 0 auto; background-color: rgba(0, 242, 254, 0.3); }
+
+        .mockup-list { margin-top: 20px; display: flex; flex-direction: column; gap: 15px; }
+        .mockup-list-item { display: flex; align-items: center; gap: 10px; }
+        .skeleton.avatar { width: 35px; height: 35px; border-radius: 50%; flex-shrink: 0; }
+        .skeleton-text-group { flex-grow: 1; }
+        .skeleton.line { height: 10px; margin-bottom: 8px; }
+        .skeleton.line.short { width: 60%; }
+        
+        .mockup-nav { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-top: auto; padding-top: 15px; flex-shrink: 0;}
+        .skeleton.nav-icon { height: 20px; width: 20px; margin: 0 auto 5px; border-radius: 5px; }
+        .skeleton.nav-text { height: 8px; width: 30px; margin: 0 auto; }
+        .mobile-mockup-container { display: none; }
+        
+        /* --- FLOATING ICONS ANIMATION --- */
+        .floating-icons { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5; }
+        .floating-icons .icon-float { position: absolute; font-size: 1.5rem; color: var(--neon-cyan); opacity: 0; animation: float-up 4s infinite ease-out; bottom: 20%; left: 50%; text-shadow: 0 0 10px var(--neon-cyan); }
+        .floating-icons .icon-float.heart { color: var(--neon-pink); text-shadow: 0 0 10px var(--neon-pink); }
+        
+        .floating-icons .icon-float:nth-child(1) { left: 40%; animation-delay: 0s; font-size: 1.2rem; }
+        .floating-icons .icon-float:nth-child(2) { left: 65%; animation-delay: 0.5s; font-size: 1.8rem; }
+        .floating-icons .icon-float:nth-child(3) { left: 30%; animation-delay: 1.5s; font-size: 1.4rem; }
+        .floating-icons .icon-float:nth-child(4) { left: 70%; animation-delay: 2.2s; }
+        .floating-icons .icon-float:nth-child(5) { left: 50%; animation-delay: 3s; font-size: 1.6rem; }
+        
+        @keyframes float-up {
+            0% { transform: translateY(0) scale(0.5); opacity: 0; }
+            50%, 70% { opacity: 1; }
+            100% { transform: translateY(-180px) scale(1.1); opacity: 0; }
+        }
+        
+        /* --- REST OF PAGE --- */
+        .pillars-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; max-width: 800px; margin: 0 auto; }
+        .pillar-card { background: var(--card-background); padding: 2.5rem; border-radius: 15px; border: 1px solid var(--border-color); backdrop-filter: blur(8px); transition: all 0.3s ease; text-align: left; display: flex; align-items: center; gap: 2rem; }
+        .pillar-card:hover { transform: translateY(-5px) scale(1.02); border-color: var(--neon-cyan); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); }
+        .pillar-card .icon { font-size: 3rem; flex-shrink: 0; } .pillar-card h3 { margin-bottom: 0.25rem; } .pillar-card p { margin-bottom: 0; }
+        .feature-item { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; margin-bottom: 6rem; }
+        .feature-item:last-child { margin-bottom: 0; } .feature-item:nth-child(even) .feature-image { order: 1; } .feature-item:nth-child(even) .feature-text { order: 0; }
+        .earnings-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+        .earnings-actions { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin-top: 3rem; }
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-top: 2rem; }
+        .skill-tag { background: var(--card-background); padding: 12px 15px; border-radius: 8px; text-align: center; font-weight: 500; border: 1px solid var(--border-color); transition: all 0.2s ease-in-out; }
+        .skill-tag:hover { color: var(--neon-cyan); transform: scale(1.05); border-color: var(--neon-cyan); box-shadow: 0 0 15px rgba(0, 242, 254, 0.4); }
+        .incentives-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+        .incentive-card { background: var(--card-background); padding: 1.5rem; border-radius: 10px; border-left: 4px solid var(--neon-cyan); transition: all 0.3s ease; }
+        .incentive-card:hover { transform: translateY(-5px) scale(1.02); background: rgba(12, 30, 56, 0.9); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+        .incentive-card h3 { font-size: 1.2rem; color: var(--neon-cyan); margin-bottom: 0.5rem; }
+        .icon-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+        .icon-card { background: var(--card-background); padding: 2rem 1.5rem; border-radius: 10px; border: 1px solid var(--border-color); text-align: center; transition: all 0.3s ease; }
+        .icon-card:hover { transform: translateY(-8px); border-color: var(--neon-cyan); }
+        .icon-card .icon { font-size: 2.5rem; margin-bottom: 1rem; display: block; color: var(--neon-cyan); }
+        #cta .container { text-align: center; background: linear-gradient(135deg, rgba(44, 114, 255, 0.1), rgba(0, 242, 254, 0.15)); border-radius: 20px; padding: 4rem 1.5rem; border: 1px solid var(--border-color); }
+        #cta h2 { font-size: 2.5rem; }
+        #main-footer { background-color: var(--background-dark); text-align: center; padding: 3rem 0; border-top: 1px solid var(--border-color); }
+        .social-links a { color: var(--text-muted); font-size: 1.8rem; margin: 0 15px; display: inline-block; transition: color 0.3s ease, transform 0.3s ease; }
+        .social-links a:hover { color: var(--neon-cyan); transform: translateY(-3px); }
+        .copyright { margin-top: 1.5rem; font-size: 0.9rem; color: #aaa; }
+        .footer-logo img { max-height: 60px; margin-bottom: 1rem; opacity: 0.8; }
+        .anim { opacity: 0; transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+        .anim-fade-up { transform: translateY(50px); } .anim-slide-left { transform: translateX(50px); } .anim-slide-right { transform: translateX(-50px); } .anim-zoom-in { transform: scale(0.9); }
+        .anim.visible { opacity: 1; transform: translate(0, 0) scale(1); }
+
+        @media (max-width: 992px) {
+            #hero { min-height: auto; padding: 8rem 0 6rem; }
+            .hero-grid { grid-template-columns: 1fr; }
+            .coded-mockup-wrapper { display: none; }
+            .mobile-mockup-container { display: block; }
+            
+            .hero-main-display { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 1rem; margin-bottom: 2rem; }
+            .hero-content h1 { font-size: clamp(2rem, 8vw, 2.8rem); line-height: 1.1; }
+            .hero-content .subtitle { font-size: 1rem; margin: 0 0 1.5rem; }
+            .hero-social-proof { margin-top: 2rem; gap: 1.5rem; }
+
+            .mobile-mockup-container .coded-mockup { width: 120px; height: 240px; border-radius: 20px; padding: 8px; }
+            .mobile-mockup-container .mockup-screen { border-radius: 12px; padding: 10px; }
+            .mobile-mockup-container .mockup-header { margin-bottom: 15px; }
+            .mobile-mockup-container .mockup-logo { width: 60%; }
+            .mobile-mockup-container .mockup-profile { width: 20px; height: 20px; }
+            .mobile-mockup-container .mockup-balance-card { display: none; }
+            .mobile-mockup-container .mockup-nav { display: none; }
+            .mobile-mockup-container .mockup-list { margin-top: 0; gap: 12px; }
+            .mobile-mockup-container .skeleton.avatar { width: 25px; height: 25px; }
+            .mobile-mockup-container .skeleton.line { height: 8px; }
+            
+            /* FIXED: Animation styles for mobile */
+            .mobile-mockup-container .floating-icons .icon-float { font-size: 1.2rem; bottom: 10%; }
+            .mobile-mockup-container .floating-icons .icon-float:nth-child(2) { font-size: 1.5rem; }
+
+            .main-nav { position: fixed; top: 0; right: -100%; width: 70%; max-width: 320px; height: 100vh; background: rgba(5, 10, 28, 0.98); backdrop-filter: blur(15px); transition: right 0.4s ease-in-out; z-index: 1000; display: flex; justify-content: center; align-items: center; border-left: 1px solid var(--border-color); }
+            .main-nav.open { right: 0; } .main-nav ul { display: flex; flex-direction: column; gap: 2rem; text-align: center; } .main-nav a { font-size: 1.3rem; }
+            #mobile-menu-toggle { display: flex; }
+            .section-grid, .feature-item, .feature-item:nth-child(even), .earnings-grid { grid-template-columns: 1fr; }
+            .feature-item:nth-child(even) .feature-image { order: 0; } .feature-item .feature-image { margin-bottom: 2rem; } .section-grid .section-image { margin-top: 2rem; }
+        }
+
+        @media (max-width: 768px) {
+            html { font-size: 95%; } section { padding: 4rem 0; } h2 { font-size: 1.8rem; }
+            .header-right .btn-primary { padding: 10px 20px; font-size: 0.9rem; }
+            .pillar-card { flex-direction: column; text-align: center; padding: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="main-header">
+        <div class="container header-content">
+            <a href="#hero" class="logo"><img src="assets/logo.png" alt="MiAmor Logo"></a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#features" class="nav-link">Features</a></li>
+                    <li><a href="#earnings" class="nav-link">Earnings</a></li>
+                    <li><a href="#skills" class="nav-link">Learn</a></li>
+                    <li><a href="#why-us" class="nav-link">Why Us?</a></li>
+                </ul>
+            </nav>
+            <div class="header-right">
+                <a href="register.html" class="btn btn-primary">Join Now</a>
+                <button id="mobile-menu-toggle" aria-label="Open menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+
+        <section id="hero">
+            <div class="hero-bg-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+            </div>
+            <div class="container">
+                <div class="hero-grid">
+                    <div class="hero-content">
+                        <div class="hero-main-display">
+                            <h1 class="anim anim-fade-up">Find Love. Build Wealth. Grow Your Skills.</h1>
+                            <!-- Coded mockup for MOBILE view -->
+                            <div class="mobile-mockup-container anim anim-fade-up">
+                                <div class="mockup-animation-container">
+                                    <div class="coded-mockup">
+                                        <div class="mockup-screen">
+                                            <div class="mockup-header">
+                                                <img src="assets/logo.png" alt="MiAmor Logo" class="mockup-logo">
+                                                <div class="mockup-profile skeleton"></div>
+                                            </div>
+                                            <div class="mockup-list">
+                                                <div class="mockup-list-item">
+                                                    <div class="skeleton avatar skeleton-pink"></div>
+                                                    <div class="skeleton-text-group">
+                                                        <div class="skeleton line"></div>
+                                                        <div class="skeleton line short"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="mockup-list-item">
+                                                    <div class="skeleton avatar"></div>
+                                                    <div class="skeleton-text-group">
+                                                        <div class="skeleton line"></div>
+                                                        <div class="skeleton line short"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="mockup-list-item">
+                                                    <div class="skeleton avatar"></div>
+                                                    <div class="skeleton-text-group">
+                                                        <div class="skeleton line"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="floating-icons">
+                                        <span class="icon-float">$</span>
+                                        <span class="icon-float heart">❤️</span>
+                                        <span class="icon-float">$</span>
+                                        <span class="icon-float">$</span>
+                                        <span class="icon-float heart">❤️</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="subtitle anim anim-fade-up" style="transition-delay: 150ms;">The dynamic platform to connect, earn, and learn. Your journey to love and financial empowerment across Africa starts here.</p>
+                        <a href="register.html" class="btn btn-primary anim anim-fade-up" style="transition-delay: 300ms">Join Us Today</a>
+
+                        <div class="hero-social-proof anim anim-fade-up" style="transition-delay: 450ms;">
+                            <div class="user-avatars">
+                                <div class="avatars">
+                                    <img src="assets/user-1.png" alt="User 1">
+                                    <img src="assets/user-2.png" alt="User 2">
+                                    <img src="assets/user-3.png" alt="User 3">
+                                </div>
+                                <span class="label">Join 50,000+ members</span>
+                            </div>
+                            <div class="store-badges">
+                                <a href="register.html"><img src="assets/app-store.png" alt="Download on the App Store"></a>
+                                <a href="register.html"><img src="assets/google-play.png" alt="Get it on Google Play"></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Coded mockup for DESKTOP view -->
+                    <div class="coded-mockup-wrapper anim anim-slide-left" style="transition-delay: 100ms;">
+                        <div class="mockup-animation-container">
+                            <div class="coded-mockup">
+                               <div class="mockup-screen">
+                                    <div class="mockup-header">
+                                        <img src="assets/logo.png" alt="MiAmor Logo" class="mockup-logo">
+                                        <div class="mockup-profile skeleton"></div>
+                                    </div>
+                                    <div class="mockup-balance-card">
+                                        <div class="skeleton text-sm"></div>
+                                        <div class="skeleton text-lg"></div>
+                                        <div class="skeleton text-md"></div>
+                                    </div>
+                                    <div class="mockup-list">
+                                        <div class="mockup-list-item">
+                                            <div class="skeleton avatar skeleton-pink"></div>
+                                            <div class="skeleton-text-group">
+                                                <div class="skeleton line"></div>
+                                                <div class="skeleton line short"></div>
+                                            </div>
+                                        </div>
+                                        <div class="mockup-list-item">
+                                            <div class="skeleton avatar"></div>
+                                            <div class="skeleton-text-group">
+                                                <div class="skeleton line"></div>
+                                                <div class="skeleton line short"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mockup-nav">
+                                        <div><div class="skeleton nav-icon"></div><div class="skeleton nav-text"></div></div>
+                                        <div><div class="skeleton nav-icon"></div><div class="skeleton nav-text"></div></div>
+                                        <div><div class="skeleton nav-icon"></div><div class="skeleton nav-text"></div></div>
+                                        <div><div class="skeleton nav-icon"></div><div class="skeleton nav-text"></div></div>
+                                    </div>
+                               </div>
+                            </div>
+                            <div class="floating-icons">
+                                <span class="icon-float">$</span>
+                                <span class="icon-float heart">❤️</span>
+                                <span class="icon-float">$</span>
+                                <span class="icon-float">$</span>
+                                <span class="icon-float heart">❤️</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- The rest of the page content remains the same -->
+        <section id="about" class="section-bg">
+            <div class="container section-grid">
+                <div class="section-text-content anim anim-slide-right">
+                    <h2><span class="highlight">What is MiAmor?</span></h2>
+                    <p>MiAmor is a dynamic platform designed to help users find love, make money through networking, and acquire valuable skills. Serving multiple African countries, it offers a space for meaningful connections, financial opportunities, and personal growth through learning.</p>
+                    <p>Founded by a seasoned serial entrepreneur, MiAmor is built to ensure every user gains real value. With a strong focus on community and empowerment, the platform blends relationship-building with entrepreneurship and skill development.</p>
+                </div>
+                <div class="image-container anim anim-slide-left">
+                    <img src="assets/what-is-miamor.jpg" alt="A couple happily connecting through the MiAmor platform" class="section-image">
+                </div>
+            </div>
+        </section>
+        
+        <section id="pillars">
+            <div class="container">
+                <div class="pillars-grid" data-stagger-children>
+                    <div class="pillar-card anim anim-fade-up"><span class="icon">❤️</span><div class="pillar-text"><h3>Match & Connect</h3><p>Discover real connections and spark love. Our platform helps you find your perfect match, turning swipes into meaningful relationships and daily earnings.</p></div></div>
+                    <div class="pillar-card anim anim-fade-up"><span class="icon">💰</span><div class="pillar-text"><h3>Earn & Prosper</h3><p>Turn your social time into income. Earn from matches, games, social shares, and our marketplace. Your path to financial growth starts here.</p></div></div>
+                    <div class="pillar-card anim anim-fade-up"><span class="icon">🎓</span><div class="pillar-text"><h3>Learn & Grow</h3><p>More than a love platform, MiAmor is your digital learning hub. Access in-demand skills like digital marketing, web development, and more.</p></div></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="section-bg">
+            <div class="container">
+                <div class="section-title-wrapper anim anim-fade-up">
+                    <h2><span class="highlight">A Platform Packed with Features</span></h2>
+                    <p>MiAmor is more than just matching. It's an all-in-one ecosystem for love, fun, and money-making opportunities, designed to enrich every aspect of your life.</p>
+                </div>
+                <div class="feature-item"><div class="feature-image anim anim-slide-right"><img src="assets/find-love-make-money.jpg" alt="Find Love & Make Money" class="section-image"></div><div class="feature-text anim anim-slide-left"><h3>Earn from Every Match</h3><p>What if every match earned you up to $2.5? On MiAmor, your swipe can spark love and income. Discover real connections, get rewarded instantly, and turn dating into daily earnings. It's not just romance—it's revenue. Find love. Get paid. Repeat.</p></div></div>
+                <div class="feature-item"><div class="feature-image anim anim-slide-left"><img src="assets/tiktok-facebook-lovers.jpg" alt="Couple happily using social media for earnings" class="section-image"></div><div class="feature-text anim anim-slide-right"><h3>Social Earning Power</h3><p>Earn up to $2.5 daily by sharing your videos to TikTok and Facebook. You can also duet with other users to boost your earnings. It's fun, fast, and free! MiAmor turns your social time into real income.</p></div></div>
+                <div class="feature-item"><div class="feature-image anim anim-slide-right"><img src="assets/games-modules.jpg" alt="Couple playing video games" class="section-image"></div><div class="feature-text anim anim-slide-left"><h3>Games & Entertainment</h3><p>Play fun games and earn real money on MiAmor! Fund your wallet, choose from exciting available games, win, and withdraw your won amounts instantly to your bank account. Whether for fun or profit, each win brings real earnings.</p></div></div>
+            </div>
+        </section>
+        
+        <section id="more-features">
+            <div class="container">
+                <div class="icon-grid" data-stagger-children>
+                    <div class="icon-card anim anim-fade-up"><span class="icon">🎁</span><h4>Love Hamper</h4><p>Win surprise weekly gifts like AirPods, Power Banks, and more right from your dashboard. It's our way of saying thank you!</p></div>
+                    <div class="icon-card anim anim-fade-up"><span class="icon">🛒</span><h4>Sell It Sector</h4><p>Our trusted marketplace lets you sell your legal items directly to ready buyers. No middlemen, no stress. Just fast, secure transactions.</p></div>
+                    <div class="icon-card anim anim-fade-up"><span class="icon">🏆</span><h4>Couples Challenge</h4><p>Join our couples challenge for a chance to win a share of a massive prize pool. Sign up, pick your partner, and compete!</p></div>
+                    <div class="icon-card anim anim-fade-up"><span class="icon">✈️</span><h4>Love Trip / Tour</h4><p>Chosen winners who find true love on MiAmor get to enjoy a fun, memorable incentive trip to tour Africa.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="earnings" class="section-bg">
+            <div class="container">
+                <div class="section-title-wrapper anim anim-fade-up">
+                    <h2><span class="highlight">Earnings Framework</span></h2>
+                    <p>We offer two powerful earning tiers, MiAmor Plus and MiAmor Ultra, designed to maximize your income potential on the platform.</p>
+                </div>
+                <div class="earnings-grid">
+                    <div class="anim anim-slide-right"><img src="assets/earnings-plus.jpg" class="section-image" alt="MiAmor Plus Earnings Framework"></div>
+                    <div class="anim anim-slide-left"><img src="assets/earnings-ultra.jpg" class="section-image" alt="MiAmor Ultra Earnings Framework"></div>
+                </div>
+                <div class="earnings-actions anim anim-fade-up"><a href="register.html" class="btn btn-primary">Choose MiAmor Plus</a><a href="register.html" class="btn btn-primary">Choose MiAmor Ultra</a></div>
+            </div>
+        </section>
+        
+        <section id="skills">
+            <div class="container section-grid">
+                <div class="image-container anim anim-slide-right"><img src="assets/skills-lab.jpg" alt="Man learning on a laptop with digital icons" class="section-image"></div>
+                <div class="section-text-content anim anim-slide-left">
+                    <h2><span class="highlight">Skills Lab</span></h2>
+                    <p>Where learning stops, growth stops. On MiAmor, we provide an avenue for every user to learn and acquire required present-day skills. Grow personally and professionally with our digital learning hub.</p>
+                    <div class="skills-grid" data-stagger-children>
+                        <div class="skill-tag anim anim-zoom-in">Digital Marketing</div><div class="skill-tag anim anim-zoom-in">Website Development</div><div class="skill-tag anim anim-zoom-in">Graphics Designing</div><div class="skill-tag anim anim-zoom-in">Copywriting</div><div class="skill-tag anim anim-zoom-in">UI/UX Designing</div><div class="skill-tag anim anim-zoom-in">App Development</div><div class="skill-tag anim anim-zoom-in">Mini Importation</div><div class="skill-tag anim anim-zoom-in">Freelancing Skills</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="incentives" class="section-bg">
+             <div class="container">
+                <div class="section-title-wrapper anim anim-fade-up">
+                    <h2><span class="highlight">Sales Commission Incentives</span></h2>
+                    <p>We created a generous incentive system to reward your efforts. Every user gets rewarded handsomely for turning leads into active users and participating on the platform.</p>
+                </div>
+                <div class="incentives-grid" data-stagger-children>
+                    <div class="incentive-card anim anim-fade-up"><h3>200 Milestone</h3><p>Smart TV / Samsung 8+</p></div>
+                    <div class="incentive-card anim anim-fade-up"><h3>350 Milestone</h3><p>Fully Automated Laptops / PS4</p></div>
+                    <div class="incentive-card anim anim-fade-up"><h3>500 Milestone</h3><p>iPhone 12 / PS5</p></div>
+                    <div class="incentive-card anim anim-fade-up"><h3>1000 Milestone</h3><p>iPhone 14 / Samsung Fold 4</p></div>
+                    <div class="incentive-card anim anim-fade-up"><h3>2000 Milestone</h3><p>iPhone 16 / Samsung Fold 6</p></div>
+                    <div class="incentive-card anim anim-fade-up"><h3>3500 Milestone</h3><p>iPhone 17 / Samsung Fold 7</p></div>
+                    <div class="incentive-card anim anim-fade-up" style="grid-column: 1 / -1;"><h3>5000 Milestone</h3><p>Come on an incentive trip with us, let's tour around Africa or its cash equivalent.</p></div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="trust">
+             <div class="container section-grid">
+                 <div class="section-text-content anim anim-slide-right">
+                    <h2><span class="highlight">A Legit & Certified Company</span></h2>
+                    <p>Yes! MiAmor is now officially registered with the Corporate Affairs Commission (CAC). This confirms MiAmor as a legal, credible, and trustworthy platform. You can confidently join, promote, and earn, knowing it's fully compliant.</p>
+                     <p>This marks a new chapter of transparency, growth, and long-term success for the MiAmor platform.</p>
+                </div>
+                <div class="image-container anim anim-slide-left"><img src="assets/certification.jpg" alt="MiAmor Official CAC Certification" class="section-image"></div>
+            </div>
+        </section>
+
+        <section id="why-us" class="section-bg">
+            <div class="container">
+                <div class="section-title-wrapper anim anim-fade-up">
+                    <h2><span class="highlight">Why Choose MiAmor?</span></h2>
+                    <p>MiAmor is secure, user-first, and globally trusted. We are built on a foundation of transparency, security, and user empowerment.</p>
+                </div>
+                <div class="icon-grid" data-stagger-children>
+                    <div class="icon-card anim anim-fade-up"><span class="icon">🛡️</span><h4>Data Protection</h4><p>Your data is secure and protected with top-level privacy measures guaranteed.</p></div>
+                    <div class="icon-card anim anim-fade-up"><span class="icon">🥇</span><h4>User-First Priority</h4><p>We place our users as priorities, ensuring a safe and user-friendly system.</p></div>
+                    <div class="icon-card anim anim-fade-up"><span class="icon">🤝</span><h4>Full Transparency</h4><p>We operate with clear policies and practices you can always trust.</p></div>
+                    <div class="icon-card anim anim-fade-up"><span class="icon">⚡</span><h4>Fast Payouts</h4><p>Enjoy fast, reliable commission payouts for all your earnings.</p></div>
+                    <div class="icon-card anim anim-fade-up"><span class="icon">🌍</span><h4>Global Recognition</h4><p>A trusted and rapidly growing platform across Africa (Ghana, Kenya, Uganda, Nigeria & more).</p></div>
+                    <div class="icon-card anim anim-fade-up"><span class="icon">❤️</span><h4>One-Click Match</h4><p>Our advanced system lets you get matched in a single, simple click.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cta">
+            <div class="container anim anim-zoom-in">
+                <h2>Join a Community Built on Love and Opportunity</h2>
+                <p>Your journey to connect, earn, and grow starts now. Experience the MiAmor advantage where love meets opportunity.</p>
+                <a href="register.html" class="btn btn-primary" style="margin-top: 1.5rem; transform: scale(1.1);">Start Your Journey Now</a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer id="main-footer">
+        <div class="container">
+            <a href="#hero" class="footer-logo"><img src="assets/logo.png" alt="MiAmor Logo"></a>
+            <div class="social-links" style="margin-top: 1.5rem;">
+                <a href="#" aria-label="WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.894 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg></a>
+                <a href="#" aria-label="TikTok"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-2.43.05-4.84-.95-6.43-2.8-1.59-1.87-2.16-4.56-1.8-7.18.36-2.61 1.94-4.97 4.02-6.35 2.09-1.37 4.64-1.95 7.17-1.54v3.49c-2.1.11-4.15.93-5.33 2.63-1.22 1.75-1.55 4.34-.86 6.43.68 2.08 2.34 3.72 4.55 4.33 2.21.61 4.54.23 6.49-1.15.53-.38.92-.89 1.2-1.48.29-.59.45-1.27.48-1.96.01-2.86-.01-5.71.01-8.57v-2.8c-2.14 1.19-4.76 1.68-7.23 1.1z"/></svg></a>
+                <a href="#" aria-label="Telegram"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="currentColor"><path d="M9.78 18.39l.26 3.14c.23.29.47.33.74.15l3.22-2.15 5.51 4.01c1.01.56 1.73.27 1.98-.92l3.8-18.24c.33-1.48-.59-2.01-1.53-1.6l-21.25 8.16c-1.45.56-1.44 1.36-.26 1.71l5.43 1.69 12.63-7.94c.58-.35 1.12-.16.67.2l-1.032 9.2Z"/></svg></a>
+            </div>
+            <p class="copyright">&copy; 2025 MiAmor. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animation Script
+            const animationOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, animationOptions);
+            const animatedElements = document.querySelectorAll('.anim');
+            animatedElements.forEach(el => observer.observe(el));
+            
+            // Staggered Animations
+            const staggerContainers = document.querySelectorAll('[data-stagger-children]');
+            staggerContainers.forEach(container => {
+                const children = container.querySelectorAll('.anim');
+                children.forEach((child, index) => {
+                    child.style.transitionDelay = `${index * 100}ms`;
+                });
+            });
+
+            // Instantly animate hero elements
+            document.querySelectorAll('#hero .anim').forEach(el => {
+                setTimeout(() => { el.classList.add('visible'); }, 100);
+            });
+
+            // Mobile Menu Toggle
+            const menuToggle = document.getElementById('mobile-menu-toggle');
+            const mainNav = document.querySelector('.main-nav');
+            const navLinks = document.querySelectorAll('.main-nav a');
+            menuToggle.addEventListener('click', () => {
+                const isOpen = menuToggle.classList.toggle('open');
+                mainNav.classList.toggle('open');
+                document.body.style.overflow = isOpen ? 'hidden' : '';
+            });
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (link.getAttribute('href').startsWith('#')) {
+                        menuToggle.classList.remove('open');
+                        mainNav.classList.remove('open');
+                        document.body.style.overflow = '';
+                    }
+                });
+            });
+            
+            // Active Nav Link on Scroll
+            const sections = document.querySelectorAll('section[id]');
+            const allNavLinks = document.querySelectorAll('.main-nav a');
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= sectionTop - 150) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                allNavLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').substring(1) === current) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
