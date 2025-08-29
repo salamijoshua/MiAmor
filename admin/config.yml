@@ -5,6 +5,7 @@ backend:
   repo: salamijoshua/MiAmor # IMPORTANT: Use your username/repo
   branch: main # The branch to update
   auth_proxy_url: https://api.netlify.com/auth
+  site_id: a585e151-dd81-4b52-aaa2-6821a570231e
 
 # This is where the media files (like images) will be stored.
 media_folder: "assets/uploads"
