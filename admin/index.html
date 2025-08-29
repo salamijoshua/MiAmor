@@ -4,10 +4,49 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Content Manager | MiAmor</title>
-  <!-- The script tag should NOT be here -->
+  <!-- The Decap CMS script will be loaded first -->
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 </head>
 <body>
-  <!-- Move the script tag here, just before the closing </body> -->
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script>
+    // Directly initialize Decap CMS with the configuration
+    // This bypasses the need for admin/config.yml
+    if (window.CMS) {
+      CMS.init({
+        config: {
+          backend: {
+            name: 'github',
+            repo: 'salamijoshua/MiAmor', // <-- ENSURE THIS IS YOUR GITHUB USERNAME/REPO
+            branch: 'main',             // <-- ENSURE THIS IS YOUR MAIN BRANCH NAME
+            auth_proxy_url: 'https://api.netlify.com/auth',
+            site_id: 'a585e151-dd81-4b52-aaa2-6821a570231e' // <-- ENSURE THIS IS YOUR NETLIFY PROJECT ID
+          },
+          media_folder: 'assets/uploads',
+          public_folder: '/assets/uploads',
+          collections: [
+            {
+              name: 'settings',
+              label: 'Payment Settings',
+              files: [
+                {
+                  label: 'Account & Contact Details',
+                  name: 'details',
+                  file: '_data/settings.yml',
+                  fields: [
+                    { label: 'Account Holder Name', name: 'account_name', widget: 'string' },
+                    { label: 'Bank Name', name: 'bank_name', widget: 'string' },
+                    { label: 'Account Number', name: 'account_number', widget: 'string' },
+                    { label: 'WhatsApp Number (with country code, no +)', name: 'whatsapp_number', widget: 'string', hint: 'Example: 2348012345678' }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      });
+    } else {
+      console.error("Decap CMS script not loaded or window.CMS is not available.");
+    }
+  </script>
 </body>
 </html>
