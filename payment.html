@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale-1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Complete Payment | MiAmor</title>
 
     <!-- FAVICON LINKS -->
@@ -161,17 +161,20 @@
                 <div class="detail-item">
                     <label>Account Number</label>
                     <div class="detail-value">
-                        <span id="account-number">9040961001</span>
+                        <!-- MODIFIED: Placeholder for Firebase -->
+                        <span id="account-number">...</span>
                         <button class="copy-btn" data-copy-target="account-number">Copy</button>
                     </div>
                 </div>
                 <div class="detail-item">
                     <label>Bank</label>
-                    <input type="text" class="detail-input" value="Moniepoint MFB" readonly>
+                    <!-- MODIFIED: Placeholder and ID for Firebase -->
+                    <input type="text" id="bank-name" class="detail-input" value="..." readonly>
                 </div>
                 <div class="detail-item">
                     <label>Account Name</label>
-                    <input type="text" class="detail-input" value="SALAMI FAITH" readonly>
+                    <!-- MODIFIED: Placeholder and ID for Firebase -->
+                    <input type="text" id="account-name" class="detail-input" value="..." readonly>
                 </div>
             </div>
             
@@ -195,6 +198,7 @@
     </div>
 
 <script>
+// This is the original script, with the form submission part removed.
 document.addEventListener('DOMContentLoaded', () => {
 
     const packageData = {
@@ -241,7 +245,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const bankDisplay = document.getElementById('selected-bank-display');
     const bankSearchInput = document.getElementById('bank-search-input');
     const bankListContainer = document.getElementById('bank-list-container');
-    let selectedBank = null;
+    
+    // This variable needs to be accessible by the Firebase script's form listener
+    window.selectedBank = null; 
 
     nigerianBanks.forEach(bank => { const option = document.createElement('div'); option.classList.add('bank-option'); option.textContent = bank; option.dataset.value = bank; bankListContainer.appendChild(option); });
 
@@ -249,36 +255,85 @@ document.addEventListener('DOMContentLoaded', () => {
 
     bankSearchInput.addEventListener('keyup', () => { const filter = bankSearchInput.value.toUpperCase(); document.querySelectorAll('.bank-option').forEach(option => { if (option.textContent.toUpperCase().indexOf(filter) > -1) { option.style.display = ""; } else { option.style.display = "none"; } }); });
 
-    bankListContainer.addEventListener('click', (e) => { if (e.target.classList.contains('bank-option')) { selectedBank = e.target.dataset.value; bankDisplay.textContent = selectedBank; bankWrapper.classList.remove('open'); } });
+    bankListContainer.addEventListener('click', (e) => { if (e.target.classList.contains('bank-option')) { window.selectedBank = e.target.dataset.value; bankDisplay.textContent = window.selectedBank; bankWrapper.classList.remove('open'); } });
     
     document.addEventListener('click', (e) => { if (!bankWrapper.contains(e.target)) { bankWrapper.classList.remove('open'); } });
 
-    const confirmationForm = document.getElementById('payment-confirmation-form');
-    confirmationForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
-        if (!selectedBank) {
-            alert('Please select the bank you sent the money from.');
-            return;
-        }
-        
-        const submitButton = confirmationForm.querySelector('button[type="submit"]');
-        submitButton.disabled = true;
-        submitButton.innerHTML = `<span class="loader"></span> Confirming...`;
-
-        setTimeout(() => {
-            const phoneNumber = '2348088595945';
-            const message = 'Hello, I have made payment on MiAmor Payment gateway, How can I start!';
-            const encodedMessage = encodeURIComponent(message);
-            
-            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-            
-            window.location.href = whatsappUrl;
-
-        }, 1500);
-    });
-
+    // REMOVED: The old confirmationForm event listener was here. It will now be handled by the Firebase script below.
 });
 </script>
+
+
+<!-- ===================================================================== -->
+<!-- =================== NEW FIREBASE SCRIPT BLOCK ======================= -->
+<!-- ===================================================================== -->
+
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+<script>
+    // 1. PASTE YOUR FIREBASE CONFIG OBJECT HEREconst firebaseConfig = {
+    apiKey: "AIzaSyA4Gg55H25MqGbxD4rsP14gdbR0H7FVgoI",
+    authDomain: "miamor-payment-details-6c720.firebaseapp.com",
+    databaseURL: "https://miamor-payment-details-6c720-default-rtdb.firebaseio.com",
+    projectId: "miamor-payment-details-6c720",
+    storageBucket: "miamor-payment-details-6c720.firebasestorage.app",
+    messagingSenderId: "710248117440",
+    appId: "1:710248117440:web:53c265ef576e3821642925",
+    measurementId: "G-4577S38C0V"
+  };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
+    const settingsRef = database.ref('settings');
+
+    // Fetch and display the settings on page load
+    settingsRef.get().then((snapshot) => {
+        if (snapshot.exists()) {
+            const data = snapshot.val();
+            
+            // Update the visible details on the page
+            document.getElementById('account-number').textContent = data.account_number;
+            document.getElementById('bank-name').value = data.bank_name;
+            document.getElementById('account-name').value = data.account_name;
+
+            // This is the new home for the form submission logic, using live data
+            const confirmationForm = document.getElementById('payment-confirmation-form');
+            if (confirmationForm) {
+                confirmationForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    
+                    if (!window.selectedBank) { // Using the globally scoped selectedBank
+                        alert('Please select the bank you sent the money from.');
+                        return;
+                    }
+                    
+                    const submitButton = confirmationForm.querySelector('button[type="submit"]');
+                    submitButton.disabled = true;
+                    submitButton.innerHTML = `<span class="loader"></span> Confirming...`;
+
+                    setTimeout(() => {
+                        const phoneNumber = data.whatsapp_number; // Using live data from Firebase!
+                        const message = 'Hello, I have made payment on MiAmor Payment gateway, How can I start!';
+                        const encodedMessage = encodeURIComponent(message);
+                        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+                        window.location.href = whatsappUrl;
+                    }, 1500);
+                });
+            }
+
+        } else {
+            console.error("Firebase Error: Could not find settings data.");
+            // Display an error to the user
+            document.getElementById('account-number').textContent = 'Error';
+            document.getElementById('bank-name').value = 'Error loading data';
+            document.getElementById('account-name').value = 'Please contact support';
+        }
+    }).catch((error) => {
+        console.error("Firebase read failed: ", error);
+    });
+</script>
+
 </body>
 </html>
