@@ -1,9 +1,18 @@
+---
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Complete Payment | MiAmor</title>
+
+    <!-- FAVICON LINKS ADDED -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+    <link rel="shortcut icon" href="assets/favicon.ico">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
@@ -47,7 +56,6 @@
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
         }
         
-        /* --- NEW: LOGO & GATEWAY LABEL STYLES --- */
         .logo { max-width: 120px; margin-bottom: 0.5rem; transition: transform 0.3s ease; }
         .logo:hover { transform: scale(1.05); }
         .gateway-label {
@@ -129,7 +137,6 @@
 
     <div class="payment-container">
         <div class="payment-card" id="payment-gateway">
-            <!-- NEW: LOGO & GATEWAY TEXT ADDED -->
             <a href="miamor.html"><img src="assets/logo.png" alt="MiAmor Logo" class="logo"></a>
             <p class="gateway-label">Payment Gateway</p>
             
@@ -156,17 +163,17 @@
                 <div class="detail-item">
                     <label>Account Number</label>
                     <div class="detail-value">
-                        <span id="account-number">9040961001</span>
+                        <span id="account-number">{{ site.data.settings.account_number }}</span>
                         <button class="copy-btn" data-copy-target="account-number">Copy</button>
                     </div>
                 </div>
                 <div class="detail-item">
                     <label>Bank</label>
-                    <input type="text" class="detail-input" value="Moniepoint MFB" readonly>
+                    <input type="text" class="detail-input" value="{{ site.data.settings.bank_name }}" readonly>
                 </div>
                 <div class="detail-item">
                     <label>Account Name</label>
-                    <input type="text" class="detail-input" value="SALAMI FAITH" readonly>
+                    <input type="text" class="detail-input" value="{{ site.data.settings.account_name }}" readonly>
                 </div>
             </div>
             
@@ -261,18 +268,16 @@ document.addEventListener('DOMContentLoaded', () => {
         submitButton.disabled = true;
         submitButton.innerHTML = `<span class="loader"></span> Confirming...`;
 
-        // --- UPDATED: REDIRECT TO WHATSAPP ---
         setTimeout(() => {
-            const phoneNumber = '2348088595945';
+            const phoneNumber = '{{ site.data.settings.whatsapp_number }}';
             const message = 'Hello, I have made payment on MiAmor Payment gateway, How can I start!';
             const encodedMessage = encodeURIComponent(message);
             
             const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
             
-            // Redirect the user to WhatsApp
             window.location.href = whatsappUrl;
 
-        }, 1500); // 1.5-second delay to show loader
+        }, 1500);
     });
 
 });
