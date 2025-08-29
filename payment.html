@@ -1,13 +1,11 @@
----
----
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale-1.0">
     <title>Complete Payment | MiAmor</title>
 
-    <!-- FAVICON LINKS ADDED -->
+    <!-- FAVICON LINKS -->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
@@ -163,17 +161,17 @@
                 <div class="detail-item">
                     <label>Account Number</label>
                     <div class="detail-value">
-                        <span id="account-number">{{ site.data.settings.account_number }}</span>
+                        <span id="account-number">9040961001</span>
                         <button class="copy-btn" data-copy-target="account-number">Copy</button>
                     </div>
                 </div>
                 <div class="detail-item">
                     <label>Bank</label>
-                    <input type="text" class="detail-input" value="{{ site.data.settings.bank_name }}" readonly>
+                    <input type="text" class="detail-input" value="Moniepoint MFB" readonly>
                 </div>
                 <div class="detail-item">
                     <label>Account Name</label>
-                    <input type="text" class="detail-input" value="{{ site.data.settings.account_name }}" readonly>
+                    <input type="text" class="detail-input" value="SALAMI FAITH" readonly>
                 </div>
             </div>
             
@@ -269,7 +267,7 @@ document.addEventListener('DOMContentLoaded', () => {
         submitButton.innerHTML = `<span class="loader"></span> Confirming...`;
 
         setTimeout(() => {
-            const phoneNumber = '{{ site.data.settings.whatsapp_number }}';
+            const phoneNumber = '2348088595945';
             const message = 'Hello, I have made payment on MiAmor Payment gateway, How can I start!';
             const encodedMessage = encodeURIComponent(message);
             
