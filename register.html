@@ -103,7 +103,6 @@
 
         .form-control:focus { outline: none; border-color: var(--neon-cyan); box-shadow: 0 0 15px rgba(0, 242, 254, 0.3); }
 
-        /* UPDATED: Styles for the password toggle icon container */
         .toggle-password {
             position: absolute;
             top: 50%;
@@ -111,13 +110,12 @@
             transform: translateY(-50%);
             cursor: pointer;
             color: var(--text-muted);
-            line-height: 0; /* Ensures proper vertical alignment */
+            line-height: 0;
         }
         .toggle-password:hover {
             color: var(--neon-cyan);
         }
 
-        /* NEW: Styles for the SVG icons */
         .toggle-password svg {
             width: 22px;
             height: 22px;
@@ -129,15 +127,15 @@
         }
 
         .toggle-password .icon-hide {
-            display: none; /* Hide the 'slashed-eye' icon by default */
+            display: none;
         }
 
         .toggle-password.is-toggled .icon-hide {
-            display: block; /* Show the 'slashed-eye' when toggled */
+            display: block;
         }
 
         .toggle-password.is-toggled .icon-show {
-            display: none; /* Hide the regular 'eye' when toggled */
+            display: none;
         }
 
         .select-label { display: block; font-weight: 500; margin-bottom: 0.5rem; color: var(--text-muted); }
@@ -216,7 +214,6 @@
                 <div class="form-group">
                     <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
                     <label for="password">Password</label>
-                    <!-- UPDATED: Password toggle now uses SVG icons -->
                     <span id="togglePassword" class="toggle-password">
                         <svg class="icon-show" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
                         <svg class="icon-hide" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
@@ -277,35 +274,35 @@
         }
         document.addEventListener("click", closeAllSelect);
 
-        // --- Form submission logic (unchanged) ---
+        // --- UPDATED: Form submission logic now redirects to Paystack ---
         const registerForm = document.getElementById('registerForm');
         registerForm.addEventListener('submit', function(event) {
             event.preventDefault(); 
+
             const submitButton = registerForm.querySelector('button[type="submit"]');
             const selectedPackage = document.getElementById('package').value;
-            const userEmail = document.getElementById('email').value;
+
+            // Validate that a package has been selected
             if (!selectedPackage) {
                 alert('Please select a package to continue.');
                 return; 
             }
+
+            // Disable the button and show a loading state
             submitButton.disabled = true;
-            submitButton.innerHTML = `<span class="loader"></span> Creating Account...`;
-            setTimeout(() => {
-                const redirectUrl = `payment.html?package=${selectedPackage}&email=${encodeURIComponent(userEmail)}`;
-                window.location.href = redirectUrl;
-            }, 2000); 
+            submitButton.innerHTML = `<span class="loader"></span> Redirecting to payment...`;
+
+            // Immediately redirect to the Paystack link
+            window.location.href = 'https://paystack.shop/pay/y6n0vclqe0';
         });
 
-        // --- UPDATED: Professional Password toggle logic ---
+        // --- Password toggle logic (unchanged) ---
         const passwordInput = document.getElementById('password');
         const togglePassword = document.getElementById('togglePassword');
 
         togglePassword.addEventListener('click', function () {
-            // Toggle the type attribute of the password input
             const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
             passwordInput.setAttribute('type', type);
-            
-            // Toggle the 'is-toggled' class on the icon container
             this.classList.toggle('is-toggled');
         });
     });
