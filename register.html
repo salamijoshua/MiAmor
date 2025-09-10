@@ -274,13 +274,14 @@
         }
         document.addEventListener("click", closeAllSelect);
 
-        // --- UPDATED: Form submission logic now redirects to Paystack ---
+        // --- UPDATED: Form submission logic now redirects to payment.html ---
         const registerForm = document.getElementById('registerForm');
         registerForm.addEventListener('submit', function(event) {
             event.preventDefault(); 
 
             const submitButton = registerForm.querySelector('button[type="submit"]');
             const selectedPackage = document.getElementById('package').value;
+            const userEmail = document.getElementById('email').value;
 
             // Validate that a package has been selected
             if (!selectedPackage) {
@@ -292,8 +293,13 @@
             submitButton.disabled = true;
             submitButton.innerHTML = `<span class="loader"></span> Redirecting to payment...`;
 
-            // Immediately redirect to the Paystack link
-            window.location.href = 'https://paystack.shop/pay/y6n0vclqe0';
+            // Construct the URL with query parameters
+            const paymentUrl = `payment.html?package=${encodeURIComponent(selectedPackage)}&email=${encodeURIComponent(userEmail)}`;
+
+            // Redirect to the payment.html file after a short delay to show the loading state
+            setTimeout(() => {
+                window.location.href = paymentUrl;
+            }, 1000);
         });
 
         // --- Password toggle logic (unchanged) ---
