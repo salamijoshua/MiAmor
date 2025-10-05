@@ -23,8 +23,8 @@
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Join MiAmor, the dynamic platform to find love, earn income through networking, and gain valuable skills in Nigeria and Africa. Turn connections into cash today!">
-    <title>MiAmor - Make Money, Find Love, Earn Income & Register</title>
+    <meta name="description" content="Join MiAmor, a vibrant community for building meaningful connections, developing new skills, and growing your personal network in Nigeria and across Africa.">
+    <title>MiAmor - Connect, Grow & Build Your Network</title>
     
     <link rel="icon" href="https://i.ibb.co/8Ln7hsLN/20250809-230636.jpg" type="image/jpg">
     <link rel="apple-touch-icon" href="https://i.ibb.co/8Ln7hsLN/20250809-230636.jpg">
@@ -50,20 +50,43 @@
         /* General Styles */
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
         body { font-family: 'Poppins', sans-serif; background-color: var(--background-dark); color: var(--text-color); line-height: 1.7; transition: overflow 0.3s ease; }
+        
+        /* --- NEW: Aurora Background --- */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: 
+                radial-gradient(circle at 15% 25%, rgba(59, 130, 246, 0.2), transparent 40%),
+                radial-gradient(circle at 85% 75%, rgba(30, 58, 138, 0.25), transparent 40%);
+            animation: animate-aurora 20s ease-in-out infinite;
+            z-index: -1;
+            will-change: background-position;
+        }
+
+        @keyframes animate-aurora {
+            0% { background-position: 0% 50%, 50% 100%; }
+            50% { background-position: 100% 50%, 0% 0%; }
+            100% { background-position: 0% 50%, 50% 100%; }
+        }
+
         main { padding-top: var(--header-height); }
         .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
-        section { padding: 100px 0; overflow: hidden; }
+        section { padding: 100px 0; overflow: hidden; position: relative; } /* Added position relative */
         h1, h2, h3 { color: var(--heading-color); font-weight: 600; line-height: 1.2; margin-bottom: 20px; }
         h2 { font-size: 2.5rem; text-align: center; }
         h2::after { content: ''; display: block; width: 60px; height: 4px; background: var(--primary-color); margin: 20px auto 0; border-radius: 2px; }
         p { margin-bottom: 15px; }
         .btn { display: inline-block; padding: 12px 28px; background: var(--primary-color); color: var(--heading-color); border: 2px solid transparent; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; cursor: pointer; }
-        .btn:hover { background: transparent; border-color: var(--primary-color); transform: translateY(-3px); }
+        .btn:hover { background: transparent; border-color: var(--primary-color); transform: translateY(-3px); box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3); }
         .btn-outline { background: transparent; border: 2px solid var(--primary-color); }
         .btn-outline:hover { background: var(--primary-color); color: var(--heading-color); }
 
         /* Header & Navigation */
-        header { position: fixed; top: 0; left: 0; width: 100%; height: var(--header-height); background: rgba(13, 26, 46, 0.8); backdrop-filter: blur(10px); z-index: 1000; display: flex; align-items: center; border-bottom: 1px solid var(--border-color); }
+        header { position: fixed; top: 0; left: 0; width: 100%; height: var(--header-height); background: rgba(13, 26, 46, 0.8); backdrop-filter: blur(10px); z-index: 1000; display: flex; align-items: center; border-bottom: 1px solid var(--border-color); /* Initial state set by GSAP */ visibility: hidden; }
         nav { display: flex; align-items: center; width: 100%; }
         .logo { text-decoration: none; }
         .logo-img { height: 55px; width: auto; vertical-align: middle; }
@@ -77,7 +100,7 @@
         .menu-toggle .bar { width: 25px; height: 3px; background-color: var(--heading-color); border-radius: 2px; transition: all 0.3s ease; }
         
         /* Hero Section */
-        #hero { height: 100vh; min-height: 700px; display: flex; align-items: center; justify-content: center; text-align: center; background-image: radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.3), transparent 40%), radial-gradient(circle at 80% 70%, rgba(30, 58, 138, 0.4), transparent 40%), linear-gradient(160deg, var(--background-dark) 40%, #081220 100%); position: relative; }
+        #hero { height: 100vh; min-height: 700px; display: flex; align-items: center; justify-content: center; text-align: center; background: none; } /* Removed complex background */
         .hero-content { max-width: 800px; }
         .hero-logo-container { margin-bottom: 40px; position: relative; display: flex; justify-content: center; align-items: center; }
         .hero-logo { max-width: 220px; width: 100%; height: auto; position: relative; z-index: 2; }
@@ -95,15 +118,12 @@
         .toggle-btn.plus { border-radius: 30px 0 0 30px; }
         .toggle-btn.ultra { border-radius: 0 30px 30px 0; }
         .toggle-btn.active { background: var(--primary-color); color: var(--heading-color); border-color: var(--primary-color); }
-        .package-content-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
-        .package-details-list { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 15px; padding: 30px; }
-        .package-detail-item { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid var(--border-color); }
-        .package-detail-item:last-child { border-bottom: none; }
-        .package-detail-item p { margin: 0; font-size: 1rem; }
-        .package-detail-item h3 { margin: 0; font-size: 1.8rem; color: var(--primary-color); font-weight: 700; }
-        .package-cta { margin-top: 30px; text-align: center; }
-        .package-image-container { display: flex; align-items: center; justify-content: center; }
-        #package-image { width: 100%; height: auto; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); opacity: 1; transition: opacity 0.4s ease-in-out; display: block; }
+        .package-content-wrapper { display: grid; grid-template-columns: 1fr; max-width: 600px; margin: 0 auto; }
+        .package-features { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 15px; padding: 40px; }
+        .package-features ul { list-style: none; padding: 0; }
+        .package-features li { display: flex; align-items: flex-start; margin-bottom: 20px; font-size: 1.05rem; }
+        .package-features li::before { content: '✔'; color: var(--primary-color); font-size: 1.2rem; margin-right: 15px; line-height: 1.5; }
+        .package-cta { margin-top: 40px; text-align: center; }
         
         /* Other Sections */
         #about { background-color: var(--background-light); }
@@ -111,23 +131,22 @@
         #features { background-color: var(--background-light); }
         .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
         .feature-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 15px; padding: 30px; transition: transform 0.3s ease, box-shadow 0.3s ease; position: relative; cursor: pointer; padding-bottom: 60px; }
-        .feature-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); }
+        .feature-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); border-color: var(--primary-color); }
         .feature-card::after { content: 'Learn More →'; position: absolute; bottom: 25px; left: 30px; color: var(--primary-color); font-weight: 600; opacity: 0; transform: translateX(-10px); transition: all 0.3s ease-in-out; }
         .feature-card:hover::after { opacity: 1; transform: translateX(0); }
         .feature-icon { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 15px; }
         .feature-card h3 { font-size: 1.5rem; color: var(--heading-color); }
         
-        /* FAQ Section (NEW) */
+        /* FAQ Section */
         #faq { background-color: var(--background-dark); }
         .faq-container { max-width: 800px; margin: 0 auto; }
-        .faq-item { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 10px; margin-bottom: 15px; }
+        .faq-item { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 10px; margin-bottom: 15px; overflow: hidden; } /* Added overflow hidden */
         .faq-question { padding: 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
         .faq-question h3 { margin: 0; font-size: 1.2rem; }
         .faq-question .toggle-icon { font-size: 1.5rem; transition: transform 0.3s ease; }
-        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-in-out, padding 0.3s ease; }
+        .faq-answer { height: 0; overflow: hidden; } /* Changed max-height to height */
         .faq-answer p { margin: 0; padding: 0 20px 20px; }
-        .faq-item.active .faq-answer { max-height: 200px; }
-        .faq-item.active .toggle-icon { transform: rotate(45deg); }
+        /* .active class removed, GSAP will handle state */
 
         /* CTA & Footer */
         #register { background: linear-gradient(135deg, var(--secondary-color), var(--primary-color)); }
@@ -139,6 +158,8 @@
         .cta-content .btn:hover { background: transparent; color: white; border-color: white; }
         footer { text-align: center; padding: 40px 20px; border-top: 1px solid var(--border-color); background-color: var(--background-light); }
         footer p { margin: 0; }
+        footer a { color: var(--text-color); text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
         #modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(5px); z-index: 2000; display: none; justify-content: center; align-items: center; padding: 20px; opacity: 0; transition: opacity 0.3s ease-in-out; }
         #modal-overlay.active { display: flex; opacity: 1; }
         .modal-content { background: var(--background-light); padding: 30px; border-radius: 15px; border: 1px solid var(--border-color); max-width: 600px; width: 100%; position: relative; transform: scale(0.9); transition: transform 0.3s ease-in-out; max-height: 90vh; overflow-y: auto; }
@@ -148,9 +169,7 @@
         #modal-image { width: 100%; height: auto; border-radius: 10px; margin-bottom: 20px; display: block; }
         #modal-title { color: var(--primary-color); font-size: 1.8rem; }
         #modal-text { line-height: 1.8; }
-        .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
-        .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
-
+        
         /* Responsive Optimizations */
         @media (max-width: 850px) { .menu-toggle { display: flex; z-index: 10; } .nav-links { display: none; position: fixed; top: 0; right: 0; width: 70%; max-width: 300px; height: 100vh; background: var(--background-light); flex-direction: column; justify-content: center; align-items: center; transform: translateX(100%); transition: transform 0.3s ease-in-out; border-left: 1px solid var(--border-color); } .nav-links.active { display: flex; transform: translateX(0); } .nav-links li { margin: 20px 0; } .menu-toggle.active .bar:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); } .menu-toggle.active .bar:nth-child(2) { opacity: 0; } .menu-toggle.active .bar:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); } }
         @media (max-width: 768px) { h2 { font-size: 2.1rem; } #hero h1 { font-size: 2.8rem; } #hero p { font-size: 1rem; } .hero-logo { max-width: 180px; } section { padding: 80px 0; } .package-content-wrapper { grid-template-columns: 1fr; gap: 40px; } .package-image-container { order: -1; } .modal-content { padding: 20px; } #modal-title { font-size: 1.5rem; } }
@@ -164,7 +183,7 @@
       "name": "MiAmor",
       "url": "https://miamor-official.ng/",
       "logo": "https://res.cloudinary.com/db0fbc9ej/image/upload/v1753737911/IMG-20250728-WA0148df-removebg-preview_1_e7eiqe.png",
-      "description": "A dynamic platform to make money online, find love, earn income through networking, and gain valuable skills. We foster meaningful connections, financial opportunities, and personal growth.",
+      "description": "A dynamic platform for building meaningful connections, developing new skills, and growing your personal network. We foster personal growth and community empowerment.",
       "contactPoint": {
         "@type": "ContactPoint",
         "contactType": "customer support",
@@ -180,18 +199,18 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "Is MiAmor legit?",
+          "name": "Is MiAmor a legitimate platform?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes, MiAmor is a legitimate platform. We operate transparently across multiple countries with a focus on providing real value to our users through meaningful connections, genuine income opportunities via networking, and skill development. Our goal is to foster a trustworthy community for both personal and financial growth."
+            "text": "Yes, MiAmor is a legitimate community platform. We operate transparently with a focus on providing real value to our users through meaningful connections, skill development workshops, and a supportive network. Our goal is to foster a trustworthy community for personal and professional growth."
           }
         },
         {
           "@type": "Question",
-          "name": "How do you make money on MiAmor?",
+          "name": "What are the benefits of being a member?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "You can make money on MiAmor primarily through our networking and rewards system. This includes earning a significant referral bonus for inviting new members, receiving indirect referral bonuses, and earning through platform activities like our 'Get Matched & Earn' feature and Game Modules. Our packages are designed to reward you for helping our community grow."
+            "text": "Members enjoy numerous benefits, including full access to our networking platform, skill workshops, and community events. You can also earn rewards through our referral program by helping our community grow, and participate in platform activities to earn bonuses."
           }
         },
         {
@@ -199,7 +218,7 @@
           "name": "How do I register on MiAmor?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Registering on MiAmor is simple. First, you need to purchase a coupon code for either the Plus or Ultra package. This coupon covers your registration fee. Once you have the code, you can proceed to the sign-up page and complete your registration. You can get your coupon code by clicking any 'Register Now' button on our site."
+            "text": "To get started, you'll need a membership activation code for either the Plus or Ultra plan. This code covers your one-time registration fee. Once you have the code, you can proceed to the sign-up page. You can get your activation code by clicking any 'Join Our Community' button on our site to connect with an agent."
           }
         }
       ]
@@ -214,7 +233,7 @@
                 <a href="#hero" class="logo"><img src="https://res.cloudinary.com/db0fbc9ej/image/upload/v1753737911/IMG-20250728-WA0148df-removebg-preview_1_e7eiqe.png" alt="MiAmor Official Logo" class="logo-img"></a>
                 <div class="nav-controls">
                     <ul class="nav-links">
-                        <li><a href="#about">About</a></li><li><a href="#packages">Packages</a></li><li><a href="#features">Features</a></li><li><a href="https://t.me/+2349168950653?phone=2349168950653&text=I'm%20ready%20to%20know%20more%20about%20MIAMOR%20and%20Purchase%20coupon%20code%20for%20Registration" class="btn">Register Now</a></li>
+                        <li><a href="#about">About</a></li><li><a href="#packages">Plans</a></li><li><a href="#features">Features</a></li><li><a href="https://t.me/+2349168950653?phone=2349168950653&text=Hello%2C%20I%20am%20ready%20to%20Start%2C%20and%20Join%20Miamor" class="btn">Join Community</a></li>
                     </ul>
                     <div class="menu-toggle"><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
                 </div>
@@ -224,45 +243,36 @@
 
     <main>
         <section id="hero">
-             <div class="container hero-content animate-on-scroll">
+             <div class="container hero-content">
                 <div class="hero-logo-container"><img src="https://res.cloudinary.com/db0fbc9ej/image/upload/v1753737911/IMG-20250728-WA0148df-removebg-preview_1_e7eiqe.png" alt="Animated MiAmor Logo with Pulse Effect" class="hero-logo"></div>
-                <h1>Make Money Online, Find Love, & Earn Income<br>With MiAmor <span class="hero-hearts">💙</span></h1>
-                <p>A dynamic platform to make money online, find love, earn income, through networking, and gain valuable skills. We foster meaningful connections, financial opportunities, and personal growth.</p>
-                <div class="hero-buttons"><a href="https://t.me/+2349168950653?phone=2349168950653&text=I'm%20ready%20to%20know%20more%20about%20MIAMOR%20and%20Purchase%20coupon%20code%20for%20Registration" class="btn">Register Now</a><a href="#packages" class="btn btn-outline">How It Works</a></div>
+                <h1>Build Connections, Unlock Potential,<br>Join the MiAmor Community <span class="hero-hearts">💙</span></h1>
+                <p>A dynamic platform dedicated to fostering meaningful connections, personal growth, and valuable networking opportunities. Discover a community that supports your ambitions.</p>
+                <div class="hero-buttons"><a href="https://t.me/+2349168950653?phone=2349168950653&text=Hello%2C%20I%20am%20ready%20to%20Start%2C%20and%20Join%20Miamor" class="btn">Join Our Community</a><a href="#packages" class="btn btn-outline">Learn More</a></div>
             </div>
         </section>
 
         <section id="about">
-            <div class="container about-content animate-on-scroll">
+            <div class="container about-content g-fade-in">
                 <h2>What is MiAmor?</h2>
-                <p>MiAmor is a dynamic platform operating across multiple African and foreign countries, including Nigeria, designed to help users find love online, earn income through networking, and gain valuable skills. It fosters meaningful connections, financial opportunities, and personal growth. MiAmor combines relationship-building with entrepreneurship and skill development, with a strong focus on community and empowerment.</p>
+                <p>MiAmor is a vibrant community platform operating across Africa and beyond. Our mission is to help people build meaningful relationships, develop valuable life and career skills, and expand their personal network. We combine community-building with personal development, focusing on empowerment and mutual support.</p>
             </div>
         </section>
 
         <section id="packages">
             <div class="container">
-                <div class="animate-on-scroll">
-                    <h2>How MiAmor Works</h2>
+                <div class="g-fade-in">
+                    <h2>Choose Your Path to Connection</h2>
                     <div class="package-toggle">
-                        <button class="toggle-btn plus active" onclick="showPackage('plus')">Plus Package</button>
-                        <button class="toggle-btn ultra" onclick="showPackage('ultra')">Ultra Package</button>
+                        <button class="toggle-btn plus active" onclick="showPackage('plus')">Plus Plan</button>
+                        <button class="toggle-btn ultra" onclick="showPackage('ultra')">Ultra Plan</button>
                     </div>
                 </div>
-                <div class="package-content-wrapper animate-on-scroll">
-                    <div class="package-details-list">
-                        <div class="package-detail-item"><p>Registration Fee</p><h3 data-key="fee"></h3></div>
-                        <div class="package-detail-item"><p>Welcome Reward</p><h3 data-key="welcome"></h3></div>
-                        <div class="package-detail-item"><p>Referral Bonus</p><h3 data-key="referral"></h3></div>
-                        <div class="package-detail-item"><p>1st Indirect Ref. Bonus</p><h3 data-key="indirect1"></h3></div>
-                        <div class="package-detail-item"><p>2nd Indirect Ref. Bonus</p><h3 data-key="indirect2"></h3></div>
-                        <div class="package-detail-item"><p>Game Modules</p><h3 data-key="games"></h3></div>
-                        <div class="package-detail-item"><p>Matching Add-ons</p><h3 data-key="matching"></h3></div>
-                        <div class="package-detail-item"><p>Open Love Hamper</p><h3 data-key="hamper"></h3></div>
-                        <div class="package-detail-item"><p>Tiktok/FB (5k views)</p><h3 data-key="social"></h3></div>
-                        <div class="package-cta"><a href="https://t.me/+2349168950653?phone=2349168950653&text=I'm%20ready%20to%20know%20more%20about%20MIAMOR%20and%20Purchase%20coupon%20code%20for%20Registration" class="btn">Click Here To Register</a></div>
-                    </div>
-                    <div class="package-image-container">
-                        <img id="package-image" src="" alt="A representation of a MiAmor package" width="800" height="1000">
+                <div class="package-content-wrapper g-fade-in">
+                    <div class="package-features">
+                        <ul id="package-feature-list">
+                            <!-- Features will be dynamically inserted here -->
+                        </ul>
+                        <div class="package-cta"><a href="https://t.me/+2349168950653?phone=2349168950653&text=Hello%2C%20I%20am%20ready%20to%20Start%2C%20and%20Join%20Miamor" class="btn">Choose Your Plan</a></div>
                     </div>
                 </div>
             </div>
@@ -270,46 +280,46 @@
 
         <section id="features">
              <div class="container">
-                <h2 class="animate-on-scroll">Platform Features to Help You Earn</h2>
+                <h2 class="g-fade-in">Discover the MiAmor Experience</h2>
                 <div class="features-grid">
-                    <div class="feature-card animate-on-scroll" data-modal-id="cash"><div class="feature-icon">💰</div><h3>Feelings To Cash</h3><p>Every connection, conversation, and spark of love has the power to earn you real cash.</p></div>
-                    <div class="feature-card animate-on-scroll" style="transition-delay: 0.1s;" data-modal-id="gme"><div class="feature-icon">💸</div><h3>GME (Get Matched & Earn)</h3><p>Earn up to $2.5 every time you match or get matched, turning simple swipes into real income.</p               <div class="feature-card animate-on-scroll" style="transition-delay: 0.2s;" data-modal-id="games"><div class="feature-icon">🎮</div><h3>Game Modules</h3><p>Discover diverse games and win big. Every win translates into real earnings you can withdraw.</p></div>
-                    <div class="feature-card animate-on-scroll" style="transition-delay: 0.3s;" data-modal-id="trip"><div class="feature-icon">✈️</div><h3>Love Trip/Tour</h3><p>Lucky couples get an exclusive, all-expenses-paid 5-day romantic getaway to South Africa.</p></div>
+                    <div class="feature-card" data-modal-id="connections"><div class="feature-icon">🤝</div><h3>Meaningful Connections</h3><p>Our platform helps you find and connect with like-minded individuals for friendship, romance, and networking.</p></div>
+                    <div class="feature-card" data-modal-id="skills"><div class="feature-icon">📚</div><h3>Skill Development</h3><p>Access workshops and resources to learn new skills, from digital marketing to personal finance.</p></div>
+                    <div class="feature-card" data-modal-id="community"><div class="feature-icon">🎉</div><h3>Vibrant Community</h3><p>Participate in online events, play games, and engage with a supportive and active community.</p></div>
+                    <div class="feature-card" data-modal-id="perks"><div class="feature-icon">✨</div><h3>Exclusive Perks</h3><p>Active members can qualify for exciting rewards, including special bonuses and unique opportunities.</p></div>
                 </div>
             </div>
         </section>
 
         <section id="register">
             <div class="container">
-                <div class="cta-content animate-on-scroll">
-                    <h2>Ready to Start Your Journey?</h2>
-                    <p>The first thing you do to register on Miamor is to buy a coupon code. The amount you pay for coupon is based on which package you want to go for, whether it’s Plus(₦10,000) or Ultra (₦14,000). The money you pay for coupon automatically covers your registration fee. After getting the coupon you can then proceed to sign up on the platform.</p>
-                    <a href="https://t.me/+2349168950653?phone=2349168950653&text=I'm%20ready%20to%20know%20more%20about%20MIAMOR%20and%20Purchase%20coupon%20code%20for%20Registration" class="btn">Get Your Coupon Now >>></a>
+                <div class="cta-content g-fade-in">
+                    <h2>Ready to Join Our Community?</h2>
+                    <p>To get started, simply purchase a membership activation code. Your one-time activation fee unlocks all the benefits of your chosen plan. Click below to connect with an agent and get your code.</p>
+                    <a href="https://t.me/+2349168950653?phone=2349168950653&text=Hello%2C%20I%20am%20ready%20to%20Start%2C%20and%20Join%20Miamor" class="btn">Get Your Activation Code >>></a>
                 </div>
             </div>
         </section>
-
-        <!-- NEW FAQ SECTION -->
+        
         <section id="faq">
             <div class="container">
-                <div class="faq-container animate-on-scroll">
+                <div class="faq-container g-fade-in">
                     <h2>Frequently Asked Questions</h2>
                     <div class="faq-item">
                         <div class="faq-question">
-                            <h3>Is MiAmor legit?</h3>
+                            <h3>Is MiAmor a legitimate platform?</h3>
                             <span class="toggle-icon">+</span>
                         </div>
                         <div class="faq-answer">
-                            <p>Yes, MiAmor is a legitimate platform. We operate transparently across multiple countries with a focus on providing real value to our users through meaningful connections, genuine income opportunities via networking, and skill development. Our goal is to foster a trustworthy community for both personal and financial growth.</p>
+                            <p>Yes, MiAmor is a legitimate community platform. We operate transparently with a focus on providing real value to our users through meaningful connections, skill development workshops, and a supportive network. Our goal is to foster a trustworthy community for personal and professional growth.</p>
                         </div>
                     </div>
                     <div class="faq-item">
                         <div class="faq-question">
-                            <h3>How do you make money on MiAmor?</h3>
+                            <h3>What are the benefits of being a member?</h3>
                             <span class="toggle-icon">+</span>
                         </div>
                         <div class="faq-answer">
-                            <p>You can make money on MiAmor primarily through our networking and rewards system. This includes earning a significant referral bonus for inviting new members, receiving indirect referral bonuses, and earning through platform activities like our 'Get Matched & Earn' feature and Game Modules. Our packages are designed to reward you for helping our community grow.</p>
+                            <p>Members enjoy numerous benefits, including full access to our networking platform, skill workshops, and community events. You can also earn rewards through our referral program by helping our community grow, and participate in platform activities to earn bonuses.</p>
                         </div>
                     </div>
                     <div class="faq-item">
@@ -318,7 +328,7 @@
                             <span class="toggle-icon">+</span>
                         </div>
                         <div class="faq-answer">
-                            <p>Registering on MiAmor is simple. First, you need to purchase a coupon code for either the Plus or Ultra package. This coupon covers your registration fee. Once you have the code, you can proceed to the sign-up page and complete your registration. You can get your coupon code by clicking any 'Register Now' button on our site.</p>
+                            <p>To get started, you'll need a membership activation code for either the Plus or Ultra plan. This code covers your one-time registration fee. Once you have the code, you can proceed to the sign-up page. You can get your activation code by clicking any 'Join Our Community' button on our site to connect with an agent.</p>
                         </div>
                     </div>
                 </div>
@@ -328,7 +338,10 @@
     </main>
 
     <footer>
-        <div class="container"><p>© 2025 MiAmor. All Rights Reserved. Find Love, Earn Income.</p></div>
+        <div class="container">
+            <p>© 2025 MiAmor. All Rights Reserved. | <a href="#tos">Terms of Service</a> | <a href="#privacy">Privacy Policy</a></p>
+            <p><small style="opacity: 0.7; margin-top: 10px; display: inline-block;">Disclaimer: This website is operated by an independent affiliate of MiAmor. It is not the official platform. We provide information and assistance with the registration process.</small></p>
+        </div>
     </footer>
 
     <div id="modal-overlay">
@@ -338,108 +351,175 @@
             <h3 id="modal-title"></h3><p id="modal-text"></p>
         </div>
     </div>
+    
+    <!-- GSAP Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
     <script>
         // --- DATA OBJECTS ---
         const modalData = {
-            cash: { title: 'Feelings To Cash', image: 'https://res.cloudinary.com/db0fbc9ej/image/upload/v1753739894/IMG-20250728-WA0159_ndgqvi.jpg', text: 'On MiAmor, we believe that emotional investment should be rewarding. Our innovative "Feelings To Cash" system transforms your interactions into tangible income. Every meaningful conversation you start, every connection you make, and every bond you form contributes to your earnings.', alt: 'A hand receiving money, symbolizing the Feelings to Cash feature on MiAmor.' },
-            gme: { title: 'GME (Get Matched & Earn)', image: 'https://res.cloudinary.com/db0fbc9ej/image/upload/v1753739894/IMG-20250728-WA0158_ajloh7.jpg', text: 'Turn your swipes into cash with our Get Matched & Earn (GME) feature. For every match you make, you can earn up to $2.5. This feature makes the process of finding love not just exciting but also financially rewarding.', alt: 'A person holding a phone showing a successful match on a dating app.' },
-            games: { title: 'Game Modules', image: 'https://res.cloudinary.com/db0fbc9ej/image/upload/v1753739894/IMG-20250728-WA0157_nctaqr.jpg', text: 'Dive into our diverse collection of interactive games! Whether you enjoy trivia, puzzles, or competitive challenges, there’s something for everyone. Every victory adds to your earnings, which you can withdraw directly to your bank account.', alt: 'Neon lights spelling out GAME, representing the game modules on MiAmor.' },
-            trip: { title: 'Love Trip/Tour', image: 'https://res.cloudinary.com/db0fbc9ej/image/upload/v1753739894/IMG-20250728-WA0154_ojeagc.jpg', text: 'We celebrate true love found on our platform. For lucky couples who find a genuine, lasting connection, MiAmor offers an unforgettable reward: an exclusive, all-expenses-paid 5-day romantic getaway to South Africa.', alt: 'A couple enjoying a scenic view, representing the Love Trip to South Africa.' }
+            connections: { title: 'Meaningful Connections', image: 'https://res.cloudinary.com/db0fbc9ej/image/upload/v1753739894/IMG-20250728-WA0158_ajloh7.jpg', text: 'Our smart matching system helps you discover and connect with genuine, like-minded people. Whether you are looking for friendship, a romantic partner, or professional networking, MiAmor provides the tools to build lasting relationships.', alt: 'A person on a phone successfully connecting with others.' },
+            skills: { title: 'Skill Development', image: 'https://res.cloudinary.com/db0fbc9ej/image/upload/v1753739894/IMG-20250728-WA0159_ndgqvi.jpg', text: 'Invest in yourself with our curated workshops and resources. Gain access to learning materials on topics like digital marketing, financial literacy, personal branding, and more. Unlock your potential and achieve your goals.', alt: 'A hand holding a phone, symbolizing access to learning and development.' },
+            community: { title: 'Vibrant Community', image: 'https://res.cloudinary.com/db0fbc9ej/image/upload/v1753739894/IMG-20250728-WA0157_nctaqr.jpg', text: 'Join a lively and supportive community! Participate in fun online games, challenges, and virtual events. Share your experiences, learn from others, and build a strong social circle.', alt: 'A neon sign spelling GAME, representing community activities and events.' },
+            perks: { title: 'Exclusive Perks & Rewards', image: 'https://res.cloudinary.com/db0fbc9ej/image/upload/v1753739894/IMG-20250728-WA0154_ojeagc.jpg', text: 'We believe in rewarding our active community members. Top contributors can qualify for amazing perks like special bonuses, gifts, and unique travel opportunities as a thank you for their valuable input to the community.', alt: 'A scenic view representing the exclusive travel perks for members.' }
         };
 
         const packageData = {
-            plus: { fee: 10000, welcome: 8000, referral: 9100, indirect1: 200, indirect2: 100, games: 3000, matching: 2000, hamper: 5000, social: 1500, imageUrl: 'https://res.cloudinary.com/db0fbc9ej/image/upload/v1753739894/IMG-20250728-WA0147_gdpll0.jpg' },
-            ultra: { fee: 14000, welcome: 12500, referral: 12500, indirect1: 400, indirect2: 150, games: 5000, matching: 2500, hamper: 10000, social: 2500, imageUrl: 'https://res.cloudinary.com/db0fbc9ej/image/upload/v1753739894/IMG-20250728-WA0146_yyolzs.jpg' }
+            plus: { 
+                features: [
+                    'Full access to our community platform',
+                    'Standard networking and connection tools',
+                    'Welcome bonus credits for on-platform activities',
+                    'Participate in community games and challenges',
+                    'Earn rewards for helping our community grow',
+                    'Access to foundational skill workshops'
+                ]
+            },
+            ultra: { 
+                features: [
+                    '<strong>Everything in Plus, plus:</strong>',
+                    'Premium networking tools with advanced filters',
+                    'Enhanced welcome bonus credits',
+                    'Higher rewards for community growth',
+                    'Exclusive access to advanced skill workshops',
+                    'Eligibility for special perks like gift hampers',
+                    'Priority customer support'
+                ]
+            }
         };
 
-        // --- UI ELEMENTS ---
-        const menuToggle = document.querySelector('.menu-toggle');
-        const navLinks = document.querySelector('.nav-links');
-        const packageDetailItems = document.querySelectorAll('.package-detail-item h3');
-        const packageImage = document.getElementById('package-image');
-        const plusBtn = document.querySelector('.toggle-btn.plus');
-        const ultraBtn = document.querySelector('.toggle-btn.ultra');
-
-        // --- FUNCTIONS ---
-        function animateValue(obj, start, end, duration) {
-            let startTimestamp = null;
-            const step = (timestamp) => {
-                if (!startTimestamp) startTimestamp = timestamp;
-                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                const currentVal = Math.floor(progress * (end - start) + start);
-                obj.innerHTML = `₦${currentVal.toLocaleString()}`;
-                if (progress < 1) window.requestAnimationFrame(step);
-            };
-            window.requestAnimationFrame(step);
-        }
-
-        function showPackage(packageName) {
-            const data = packageData[packageName];
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- UI ELEMENTS ---
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navLinks = document.querySelector('.nav-links');
+            const packageFeatureList = document.getElementById('package-feature-list');
+            const plusBtn = document.querySelector('.toggle-btn.plus');
+            const ultraBtn = document.querySelector('.toggle-btn.ultra');
+            const featureCards = document.querySelectorAll('.feature-card');
+            const modalOverlay = document.getElementById('modal-overlay');
+            const modalImageEl = document.getElementById('modal-image');
+            const modalTitle = document.getElementById('modal-title');
+            const modalText = document.getElementById('modal-text');
+            const closeBtn = document.querySelector('.close-btn');
             
-            packageDetailItems.forEach(item => {
-                const key = item.getAttribute('data-key');
-                if (data[key] !== undefined) animateValue(item, 0, data[key], 800);
+            // --- FUNCTIONS ---
+            window.showPackage = function(packageName) {
+                const data = packageData[packageName];
+                
+                // Populate feature list
+                packageFeatureList.innerHTML = ''; // Clear existing list
+                data.features.forEach(featureText => {
+                    const li = document.createElement('li');
+                    li.innerHTML = featureText;
+                    packageFeatureList.appendChild(li);
+                });
+
+                // Update toggle buttons
+                plusBtn.classList.toggle('active', packageName === 'plus');
+                ultraBtn.classList.toggle('active', packageName === 'ultra');
+            }
+
+            function openModal(id) {
+                const data = modalData[id];
+                if (!data) return;
+                modalImageEl.src = data.image; 
+                modalImageEl.alt = data.alt;
+                modalTitle.textContent = data.title; 
+                modalText.innerHTML = data.text;
+                modalOverlay.classList.add('active'); 
+                document.body.style.overflow = 'hidden';
+            }
+            function closeModal() {
+                modalOverlay.classList.remove('active'); 
+                document.body.style.overflow = 'auto';
+            }
+
+            // --- EVENT LISTENERS ---
+            showPackage('plus'); // Initial package display
+            menuToggle.addEventListener('click', () => { menuToggle.classList.toggle('active'); navLinks.classList.toggle('active'); });
+            featureCards.forEach(card => card.addEventListener('click', () => openModal(card.getAttribute('data-modal-id'))));
+            closeBtn.addEventListener('click', closeModal);
+            modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) closeModal(); });
+
+            // --- GSAP ANIMATIONS (REFACTORED & STABLE) ---
+            gsap.registerPlugin(ScrollTrigger);
+
+            // Set initial states for all animated elements
+            gsap.set('header', { y: -100, autoAlpha: 0 });
+            gsap.set('.hero-logo-container', { scale: 0.5, autoAlpha: 0 });
+            gsap.set('#hero h1, #hero p, .hero-buttons', { y: 30, autoAlpha: 0 });
+            gsap.set('.g-fade-in', { y: 50, autoAlpha: 0 });
+            gsap.set('.feature-card', { y: 50, autoAlpha: 0 });
+
+            // Hero entrance animation timeline
+            const tl = gsap.timeline({ defaults: { ease: "power3.out", duration: 0.8 } });
+
+            tl.to('header', { y: 0, autoAlpha: 1, duration: 1 })
+              .to('.hero-logo-container', { scale: 1, autoAlpha: 1 }, "-=0.5")
+              .to('#hero h1', { y: 0, autoAlpha: 1 }, "-=0.5")
+              .to('#hero p', { y: 0, autoAlpha: 1 }, "-=0.6")
+              .to('.hero-buttons', { y: 0, autoAlpha: 1 }, "-=0.7");
+
+            // Generic fade-in for sections on scroll
+            gsap.utils.toArray('.g-fade-in').forEach(elem => {
+                gsap.to(elem, {
+                    autoAlpha: 1,
+                    y: 0,
+                    duration: 1,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: elem,
+                        start: "top 85%",
+                        toggleActions: "play none none none"
+                    }
+                });
             });
 
-            packageImage.style.opacity = 0;
-            setTimeout(() => {
-                packageImage.src = data.imageUrl;
-                packageImage.alt = `A visual representation of the MiAmor ${packageName} package.`;
-                packageImage.style.opacity = 1;
-            }, 400);
-
-            plusBtn.classList.toggle('active', packageName === 'plus');
-            ultraBtn.classList.toggle('active', packageName === 'ultra');
-        }
-
-        document.addEventListener('DOMContentLoaded', () => { showPackage('plus'); });
-        
-        menuToggle.addEventListener('click', () => { menuToggle.classList.toggle('active'); navLinks.classList.toggle('active'); });
-
-        const featureCards = document.querySelectorAll('.feature-card');
-        const modalOverlay = document.getElementById('modal-overlay');
-        const modalImageEl = document.getElementById('modal-image');
-        const modalTitle = document.getElementById('modal-title');
-        const modalText = document.getElementById('modal-text');
-        const closeBtn = document.querySelector('.close-btn');
-
-        function openModal(id) {
-            const data = modalData[id];
-            if (!data) return;
-            modalImageEl.src = data.image; 
-            modalImageEl.alt = data.alt;
-            modalTitle.textContent = data.title; 
-            modalText.innerHTML = data.text;
-            modalOverlay.classList.add('active'); 
-            document.body.style.overflow = 'hidden';
-        }
-        function closeModal() {
-            modalOverlay.classList.remove('active'); 
-            document.body.style.overflow = 'auto';
-        }
-
-        featureCards.forEach(card => card.addEventListener('click', () => openModal(card.getAttribute('data-modal-id'))));
-        closeBtn.addEventListener('click', closeModal);
-        modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) closeModal(); });
-
-        const scrollElements = document.querySelectorAll(".animate-on-scroll");
-        const elementInView = (el) => el.getBoundingClientRect().top <= window.innerHeight;
-        const displayScrollElement = (el) => el.classList.add("is-visible");
-        const handleScrollAnimation = () => scrollElements.forEach((el) => { if (elementInView(el)) displayScrollElement(el); });
-        window.addEventListener("scroll", handleScrollAnimation);
-        handleScrollAnimation();
-
-        // FAQ Accordion Logic
-        const faqItems = document.querySelectorAll('.faq-item');
-        faqItems.forEach(item => {
-            const question = item.querySelector('.faq-question');
-            question.addEventListener('click', () => {
-                const currentlyActive = document.querySelector('.faq-item.active');
-                if (currentlyActive && currentlyActive !== item) {
-                    currentlyActive.classList.remove('active');
+            // Staggered animation for feature cards
+            gsap.to(".feature-card", {
+                autoAlpha: 1,
+                y: 0,
+                duration: 0.6,
+                stagger: 0.15,
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: ".features-grid",
+                    start: "top 80%",
+                    toggleActions: "play none none none"
                 }
-                item.classList.toggle('active');
+            });
+
+            // GSAP FAQ Accordion Logic
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach((item, index) => {
+                const question = item.querySelector('.faq-question');
+                const answer = item.querySelector('.faq-answer');
+                const icon = item.querySelector('.toggle-icon');
+                
+                gsap.set(answer, { height: 0 });
+
+                question.addEventListener('click', () => {
+                    const isOpen = item.classList.contains('active');
+
+                    faqItems.forEach((otherItem, otherIndex) => {
+                        if (index !== otherIndex && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                            gsap.to(otherItem.querySelector('.faq-answer'), { height: 0, duration: 0.4, ease: 'power2.inOut' });
+                            gsap.to(otherItem.querySelector('.toggle-icon'), { rotation: 0, duration: 0.4, ease: 'power2.inOut' });
+                        }
+                    });
+
+                    if (isOpen) {
+                        item.classList.remove('active');
+                        gsap.to(answer, { height: 0, duration: 0.4, ease: 'power2.inOut' });
+                        gsap.to(icon, { rotation: 0, duration: 0.4, ease: 'power2.inOut' });
+                    } else {
+                        item.classList.add('active');
+                        gsap.to(answer, { height: 'auto', duration: 0.4, ease: 'power2.inOut' });
+                        gsap.to(icon, { rotation: 45, duration: 0.4, ease: 'power2.inOut' });
+                    }
+                });
             });
         });
     </script>
