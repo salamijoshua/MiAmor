@@ -51,7 +51,6 @@
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
         body { font-family: 'Poppins', sans-serif; background-color: var(--background-dark); color: var(--text-color); line-height: 1.7; transition: overflow 0.3s ease; }
         
-        /* --- NEW: Aurora Background --- */
         body::before {
             content: '';
             position: fixed;
@@ -75,7 +74,7 @@
 
         main { padding-top: var(--header-height); }
         .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
-        section { padding: 100px 0; overflow: hidden; position: relative; } /* Added position relative */
+        section { padding: 100px 0; overflow: hidden; position: relative; }
         h1, h2, h3 { color: var(--heading-color); font-weight: 600; line-height: 1.2; margin-bottom: 20px; }
         h2 { font-size: 2.5rem; text-align: center; }
         h2::after { content: ''; display: block; width: 60px; height: 4px; background: var(--primary-color); margin: 20px auto 0; border-radius: 2px; }
@@ -86,7 +85,7 @@
         .btn-outline:hover { background: var(--primary-color); color: var(--heading-color); }
 
         /* Header & Navigation */
-        header { position: fixed; top: 0; left: 0; width: 100%; height: var(--header-height); background: rgba(13, 26, 46, 0.8); backdrop-filter: blur(10px); z-index: 1000; display: flex; align-items: center; border-bottom: 1px solid var(--border-color); /* Initial state set by GSAP */ visibility: hidden; }
+        header { position: fixed; top: 0; left: 0; width: 100%; height: var(--header-height); background: rgba(13, 26, 46, 0.8); backdrop-filter: blur(10px); z-index: 1000; display: flex; align-items: center; border-bottom: 1px solid var(--border-color); visibility: hidden; }
         nav { display: flex; align-items: center; width: 100%; }
         .logo { text-decoration: none; }
         .logo-img { height: 55px; width: auto; vertical-align: middle; }
@@ -100,7 +99,7 @@
         .menu-toggle .bar { width: 25px; height: 3px; background-color: var(--heading-color); border-radius: 2px; transition: all 0.3s ease; }
         
         /* Hero Section */
-        #hero { height: 100vh; min-height: 700px; display: flex; align-items: center; justify-content: center; text-align: center; background: none; } /* Removed complex background */
+        #hero { height: 100vh; min-height: 700px; display: flex; align-items: center; justify-content: center; text-align: center; background: none; }
         .hero-content { max-width: 800px; }
         .hero-logo-container { margin-bottom: 40px; position: relative; display: flex; justify-content: center; align-items: center; }
         .hero-logo { max-width: 220px; width: 100%; height: auto; position: relative; z-index: 2; }
@@ -119,7 +118,8 @@
         .toggle-btn.ultra { border-radius: 0 30px 30px 0; }
         .toggle-btn.active { background: var(--primary-color); color: var(--heading-color); border-color: var(--primary-color); }
         .package-content-wrapper { display: grid; grid-template-columns: 1fr; max-width: 600px; margin: 0 auto; }
-        .package-features { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 15px; padding: 40px; }
+        .package-features { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 15px; padding: 40px; cursor: pointer; transition: all 0.3s ease; }
+        .package-features:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); border-color: var(--primary-color); }
         .package-features ul { list-style: none; padding: 0; }
         .package-features li { display: flex; align-items: flex-start; margin-bottom: 20px; font-size: 1.05rem; }
         .package-features li::before { content: '✔'; color: var(--primary-color); font-size: 1.2rem; margin-right: 15px; line-height: 1.5; }
@@ -127,26 +127,24 @@
         
         /* Other Sections */
         #about { background-color: var(--background-light); }
-        .about-content { text-align: center; max-width: 800px; margin: 0 auto; }
+        .about-content { text-align: center; max-width: 800px; margin: 0 auto; cursor: pointer; transition: all 0.3s ease; border-radius: 15px; padding: 20px; }
+        .about-content:hover { background: var(--card-bg); transform: scale(1.03); }
         #features { background-color: var(--background-light); }
         .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
-        .feature-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 15px; padding: 30px; transition: transform 0.3s ease, box-shadow 0.3s ease; position: relative; cursor: pointer; padding-bottom: 60px; }
+        .feature-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 15px; padding: 30px; transition: transform 0.3s ease, box-shadow 0.3s ease; position: relative; cursor: pointer; }
         .feature-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); border-color: var(--primary-color); }
-        .feature-card::after { content: 'Learn More →'; position: absolute; bottom: 25px; left: 30px; color: var(--primary-color); font-weight: 600; opacity: 0; transform: translateX(-10px); transition: all 0.3s ease-in-out; }
-        .feature-card:hover::after { opacity: 1; transform: translateX(0); }
         .feature-icon { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 15px; }
         .feature-card h3 { font-size: 1.5rem; color: var(--heading-color); }
         
         /* FAQ Section */
         #faq { background-color: var(--background-dark); }
         .faq-container { max-width: 800px; margin: 0 auto; }
-        .faq-item { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 10px; margin-bottom: 15px; overflow: hidden; } /* Added overflow hidden */
+        .faq-item { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 10px; margin-bottom: 15px; overflow: hidden; }
         .faq-question { padding: 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
         .faq-question h3 { margin: 0; font-size: 1.2rem; }
         .faq-question .toggle-icon { font-size: 1.5rem; transition: transform 0.3s ease; }
-        .faq-answer { height: 0; overflow: hidden; } /* Changed max-height to height */
+        .faq-answer { height: 0; overflow: hidden; }
         .faq-answer p { margin: 0; padding: 0 20px 20px; }
-        /* .active class removed, GSAP will handle state */
 
         /* CTA & Footer */
         #register { background: linear-gradient(135deg, var(--secondary-color), var(--primary-color)); }
@@ -160,70 +158,47 @@
         footer p { margin: 0; }
         footer a { color: var(--text-color); text-decoration: none; }
         footer a:hover { text-decoration: underline; }
-        #modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(5px); z-index: 2000; display: none; justify-content: center; align-items: center; padding: 20px; opacity: 0; transition: opacity 0.3s ease-in-out; }
-        #modal-overlay.active { display: flex; opacity: 1; }
-        .modal-content { background: var(--background-light); padding: 30px; border-radius: 15px; border: 1px solid var(--border-color); max-width: 600px; width: 100%; position: relative; transform: scale(0.9); transition: transform 0.3s ease-in-out; max-height: 90vh; overflow-y: auto; }
-        #modal-overlay.active .modal-content { transform: scale(1); }
-        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 2.5rem; line-height: 1; color: var(--text-color); cursor: pointer; transition: color 0.3s ease; }
-        .close-btn:hover { color: var(--primary-color); }
-        #modal-image { width: 100%; height: auto; border-radius: 10px; margin-bottom: 20px; display: block; }
-        #modal-title { color: var(--primary-color); font-size: 1.8rem; }
-        #modal-text { line-height: 1.8; }
+        
+        /* Exit-Intent Modal Styles */
+        #exit-intent-modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: rgba(13, 26, 46, 0.85); 
+            backdrop-filter: blur(8px); 
+            z-index: 3000; 
+            display: none; 
+            justify-content: center; 
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        #exit-intent-modal-overlay.active { display: flex; opacity: 1; }
+        .exit-intent-content {
+            background: var(--background-dark);
+            border: 1px solid var(--primary-color);
+            box-shadow: 0 10px 50px rgba(59, 130, 246, 0.3);
+            text-align: center;
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.4s ease;
+        }
+        #exit-intent-modal-overlay.active .exit-intent-content { transform: translateY(0); }
+        .exit-intent-content h2 { font-size: 2rem; color: var(--primary-color); margin-bottom: 15px; }
+        .exit-intent-content h2::after { display: none; }
+        .exit-intent-content p { font-size: 1.1rem; margin-bottom: 30px; }
+        .exit-intent-content .btn { padding: 15px 40px; font-size: 1.2rem; }
+        .exit-close-btn { position: absolute; top: 15px; right: 20px; font-size: 2rem; color: var(--text-color); cursor: pointer; transition: color 0.3s ease; }
+        .exit-close-btn:hover { color: var(--primary-color); }
         
         /* Responsive Optimizations */
         @media (max-width: 850px) { .menu-toggle { display: flex; z-index: 10; } .nav-links { display: none; position: fixed; top: 0; right: 0; width: 70%; max-width: 300px; height: 100vh; background: var(--background-light); flex-direction: column; justify-content: center; align-items: center; transform: translateX(100%); transition: transform 0.3s ease-in-out; border-left: 1px solid var(--border-color); } .nav-links.active { display: flex; transform: translateX(0); } .nav-links li { margin: 20px 0; } .menu-toggle.active .bar:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); } .menu-toggle.active .bar:nth-child(2) { opacity: 0; } .menu-toggle.active .bar:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); } }
-        @media (max-width: 768px) { h2 { font-size: 2.1rem; } #hero h1 { font-size: 2.8rem; } #hero p { font-size: 1rem; } .hero-logo { max-width: 180px; } section { padding: 80px 0; } .package-content-wrapper { grid-template-columns: 1fr; gap: 40px; } .package-image-container { order: -1; } .modal-content { padding: 20px; } #modal-title { font-size: 1.5rem; } }
-        @media (max-width: 480px) { .logo-img { height: 45px; } h2 { font-size: 1.8rem; } #hero h1 { font-size: 2.2rem; } .hero-logo { max-width: 150px; } .hero-buttons { display: flex; flex-direction: column; align-items: center; } .hero-buttons .btn { margin: 10px 0; width: 80%; } .package-detail-item h3 { font-size: 1.5rem; } }
+        @media (max-width: 768px) { h2 { font-size: 2.1rem; } #hero h1 { font-size: 2.8rem; } #hero p { font-size: 1rem; } .hero-logo { max-width: 180px; } section { padding: 80px 0; } .package-content-wrapper { grid-template-columns: 1fr; gap: 40px; } }
+        @media (max-width: 480px) { .logo-img { height: 45px; } h2 { font-size: 1.8rem; } #hero h1 { font-size: 2.2rem; } .hero-logo { max-width: 150px; } .hero-buttons { display: flex; flex-direction: column; align-items: center; } .hero-buttons .btn { margin: 10px 0; width: 80%; } }
     </style>
-    <!-- Schema Markup for SEO -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "MiAmor",
-      "url": "https://miamor-official.ng/",
-      "logo": "https://res.cloudinary.com/db0fbc9ej/image/upload/v1753737911/IMG-20250728-WA0148df-removebg-preview_1_e7eiqe.png",
-      "description": "A dynamic platform for building meaningful connections, developing new skills, and growing your personal network. We foster personal growth and community empowerment.",
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "contactType": "customer support",
-        "url": "https://miamor-official.ng/"
-      }
-    }
-    </script>
-    <!-- FAQ Schema Markup (NEW) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "Is MiAmor a legitimate platform?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes, MiAmor is a legitimate community platform. We operate transparently with a focus on providing real value to our users through meaningful connections, skill development workshops, and a supportive network. Our goal is to foster a trustworthy community for personal and professional growth."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What are the benefits of being a member?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Members enjoy numerous benefits, including full access to our networking platform, skill workshops, and community events. You can also earn rewards through our referral program by helping our community grow, and participate in platform activities to earn bonuses."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How do I register on MiAmor?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "To get started, you'll need a membership activation code for either the Plus or Ultra plan. This code covers your one-time registration fee. Once you have the code, you can proceed to the sign-up page. You can get your activation code by clicking any 'Join Our Community' button on our site to connect with an agent."
-          }
-        }
-      ]
-    }
-    </script>
+    <!-- Schema Markup... -->
 </head>
 <body>
 
@@ -233,7 +208,7 @@
                 <a href="#hero" class="logo"><img src="https://res.cloudinary.com/db0fbc9ej/image/upload/v1753737911/IMG-20250728-WA0148df-removebg-preview_1_e7eiqe.png" alt="MiAmor Official Logo" class="logo-img"></a>
                 <div class="nav-controls">
                     <ul class="nav-links">
-                        <li><a href="#about">About</a></li><li><a href="#packages">Plans</a></li><li><a href="#features">Features</a></li><li><a href="https://t.me/+2349168950653?phone=2349168950653&text=I'm%20ready%20to%20know%20more%20about%20MIAMOR%20and%20Purchase%20coupon%20code%20for%20Registration" class="btn">Join Community</a></li>
+                        <li><a href="#about">About</a></li><li><a href="#packages">Plans</a></li><li><a href="#features">Features</a></li><li><a href="https://t.me/+2349168950653?phone=2349168950653&text=I'm%20ready%20to%20know%20more%20about%20MIAMOR%20and%20Purchase%20coupon%20code%20for%20Registration" class="btn cta-link">Join Community</a></li>
                     </ul>
                     <div class="menu-toggle"><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
                 </div>
@@ -247,12 +222,12 @@
                 <div class="hero-logo-container"><img src="https://res.cloudinary.com/db0fbc9ej/image/upload/v1753737911/IMG-20250728-WA0148df-removebg-preview_1_e7eiqe.png" alt="Animated MiAmor Logo with Pulse Effect" class="hero-logo"></div>
                 <h1>Build Connections, Unlock Potential,<br>Join the MiAmor Community <span class="hero-hearts">💙</span></h1>
                 <p>A dynamic platform dedicated to fostering meaningful connections, personal growth, and valuable networking opportunities. Discover a community that supports your ambitions.</p>
-                <div class="hero-buttons"><a href="https://t.me/+2349168950653?phone=2349168950653&text=I'm%20ready%20to%20know%20more%20about%20MIAMOR%20and%20Purchase%20coupon%20code%20for%20Registration" class="btn">Join Our Community</a><a href="#packages" class="btn btn-outline">Learn More</a></div>
+                <div class="hero-buttons"><a href="https://t.me/+2349168950653?phone=2349168950653&text=I'm%20ready%20to%20know%20more%20about%20MIAMOR%20and%20Purchase%20coupon%20code%20for%20Registration" class="btn cta-link">Join Our Community</a><a href="#packages" class="btn btn-outline">Learn More</a></div>
             </div>
         </section>
 
         <section id="about">
-            <div class="container about-content g-fade-in">
+            <div class="container about-content g-fade-in cta-section">
                 <h2>What is MiAmor?</h2>
                 <p>MiAmor is a vibrant community platform operating across Africa and beyond. Our mission is to help people build meaningful relationships, develop valuable life and career skills, and expand their personal network. We combine community-building with personal development, focusing on empowerment and mutual support.</p>
             </div>
@@ -268,11 +243,11 @@
                     </div>
                 </div>
                 <div class="package-content-wrapper g-fade-in">
-                    <div class="package-features">
+                    <div class="package-features cta-section">
                         <ul id="package-feature-list">
                             <!-- Features will be dynamically inserted here -->
                         </ul>
-                        <div class="package-cta"><a href="https://t.me/+2349168950653?phone=2349168950653&text=I'm%20ready%20to%20know%20more%20about%20MIAMOR%20and%20Purchase%20coupon%20code%20for%20Registration" class="btn">Choose Your Plan</a></div>
+                        <div class="package-cta"><a href="https://t.me/+2349168950653?phone=2349168950653&text=I'm%20ready%20to%20know%20more%20about%20MIAMOR%20and%20Purchase%20coupon%20code%20for%20Registration" class="btn cta-link">Choose Your Plan</a></div>
                     </div>
                 </div>
             </div>
@@ -282,10 +257,10 @@
              <div class="container">
                 <h2 class="g-fade-in">Discover the MiAmor Experience</h2>
                 <div class="features-grid">
-                    <div class="feature-card" data-modal-id="connections"><div class="feature-icon">🤝</div><h3>Meaningful Connections</h3><p>Our platform helps you find and connect with like-minded individuals for friendship, romance, and networking.</p></div>
-                    <div class="feature-card" data-modal-id="skills"><div class="feature-icon">📚</div><h3>Skill Development</h3><p>Access workshops and resources to learn new skills, from digital marketing to personal finance.</p></div>
-                    <div class="feature-card" data-modal-id="community"><div class="feature-icon">🎉</div><h3>Vibrant Community</h3><p>Participate in online events, play games, and engage with a supportive and active community.</p></div>
-                    <div class="feature-card" data-modal-id="perks"><div class="feature-icon">✨</div><h3>Exclusive Perks</h3><p>Active members can qualify for exciting rewards, including special bonuses and unique opportunities.</p></div>
+                    <div class="feature-card cta-section"><div class="feature-icon">🤝</div><h3>Meaningful Connections</h3><p>Our platform helps you find and connect with like-minded individuals for friendship, romance, and networking.</p></div>
+                    <div class="feature-card cta-section"><div class="feature-icon">📚</div><h3>Skill Development</h3><p>Access workshops and resources to learn new skills, from digital marketing to personal finance.</p></div>
+                    <div class="feature-card cta-section"><div class="feature-icon">🎉</div><h3>Vibrant Community</h3><p>Participate in online events, play games, and engage with a supportive and active community.</p></div>
+                    <div class="feature-card cta-section"><div class="feature-icon">✨</div><h3>Exclusive Perks</h3><p>Active members can qualify for exciting rewards, including special bonuses and unique opportunities.</p></div>
                 </div>
             </div>
         </section>
@@ -295,7 +270,7 @@
                 <div class="cta-content g-fade-in">
                     <h2>Ready to Join Our Community?</h2>
                     <p>To get started, simply purchase a membership activation code. Your one-time activation fee unlocks all the benefits of your chosen plan. Click below to connect with an agent and get your code.</p>
-                    <a href="https://t.me/+2349168950653?phone=2349168950653&text=I'm%20ready%20to%20know%20more%20about%20MIAMOR%20and%20Purchase%20coupon%20code%20for%20Registration" class="btn">Get Your Activation Code >>></a>
+                    <a href="https://t.me/+2349168950653?phone=2349168950653&text=I'm%20ready%20to%20know%20more%20about%20MIAMOR%20and%20Purchase%20coupon%20code%20for%20Registration" class="btn cta-link">Get Your Activation Code >>></a>
                 </div>
             </div>
         </section>
@@ -343,12 +318,14 @@
             <p><small style="opacity: 0.7; margin-top: 10px; display: inline-block;">Disclaimer: This website is operated by an independent affiliate of MiAmor. It is not the official platform. We provide information and assistance with the registration process.</small></p>
         </div>
     </footer>
-
-    <div id="modal-overlay">
-        <div class="modal-content">
-            <span class="close-btn">×</span>
-            <img id="modal-image" src="" alt="MiAmor feature" width="800" height="1000">
-            <h3 id="modal-title"></h3><p id="modal-text"></p>
+    
+    <!-- NEW: Exit-Intent Modal HTML -->
+    <div id="exit-intent-modal-overlay">
+        <div class="exit-intent-content">
+            <span class="exit-close-btn">×</span>
+            <h2>Wait! Don't Leave...</h2>
+            <p>Your journey to new connections and skills is just one click away. Join the MiAmor community now!</p>
+            <a href="https://t.me/+2349168950653?phone=2349168950653&text=I'm%20ready%20to%20know%20more%20about%20MIAMOR%20and%20Purchase%20coupon%20code%20for%20Registration" class="btn cta-link">Get My Code & Join</a>
         </div>
     </div>
     
@@ -357,14 +334,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
     <script>
-        // --- DATA OBJECTS ---
-        const modalData = {
-            connections: { title: 'Meaningful Connections', image: 'https://res.cloudinary.com/db0fbc9ej/image/upload/v1753739894/IMG-20250728-WA0158_ajloh7.jpg', text: 'Our smart matching system helps you discover and connect with genuine, like-minded people. Whether you are looking for friendship, a romantic partner, or professional networking, MiAmor provides the tools to build lasting relationships.', alt: 'A person on a phone successfully connecting with others.' },
-            skills: { title: 'Skill Development', image: 'https://res.cloudinary.com/db0fbc9ej/image/upload/v1753739894/IMG-20250728-WA0159_ndgqvi.jpg', text: 'Invest in yourself with our curated workshops and resources. Gain access to learning materials on topics like digital marketing, financial literacy, personal branding, and more. Unlock your potential and achieve your goals.', alt: 'A hand holding a phone, symbolizing access to learning and development.' },
-            community: { title: 'Vibrant Community', image: 'https://res.cloudinary.com/db0fbc9ej/image/upload/v1753739894/IMG-20250728-WA0157_nctaqr.jpg', text: 'Join a lively and supportive community! Participate in fun online games, challenges, and virtual events. Share your experiences, learn from others, and build a strong social circle.', alt: 'A neon sign spelling GAME, representing community activities and events.' },
-            perks: { title: 'Exclusive Perks & Rewards', image: 'https://res.cloudinary.com/db0fbc9ej/image/upload/v1753739894/IMG-20250728-WA0154_ojeagc.jpg', text: 'We believe in rewarding our active community members. Top contributors can qualify for amazing perks like special bonuses, gifts, and unique travel opportunities as a thank you for their valuable input to the community.', alt: 'A scenic view representing the exclusive travel perks for members.' }
-        };
-
         const packageData = {
             plus: { 
                 features: [
@@ -390,118 +359,140 @@
         };
 
         document.addEventListener('DOMContentLoaded', () => {
+            const mainCtaUrl = "https://t.me/+2349168950653?phone=2349168950653&text=I'm%20ready%20to%20know%20more%20about%20MIAMOR%20and%20Purchase%20coupon%20code%20for%20Registration";
+
             // --- UI ELEMENTS ---
             const menuToggle = document.querySelector('.menu-toggle');
             const navLinks = document.querySelector('.nav-links');
             const packageFeatureList = document.getElementById('package-feature-list');
             const plusBtn = document.querySelector('.toggle-btn.plus');
             const ultraBtn = document.querySelector('.toggle-btn.ultra');
-            const featureCards = document.querySelectorAll('.feature-card');
-            const modalOverlay = document.getElementById('modal-overlay');
-            const modalImageEl = document.getElementById('modal-image');
-            const modalTitle = document.getElementById('modal-title');
-            const modalText = document.getElementById('modal-text');
-            const closeBtn = document.querySelector('.close-btn');
-            
-            // --- FUNCTIONS ---
+            const exitIntentOverlay = document.getElementById('exit-intent-modal-overlay');
+            const exitCloseBtn = document.querySelector('.exit-close-btn');
+
+            // --- PACKAGE TOGGLER ---
             window.showPackage = function(packageName) {
                 const data = packageData[packageName];
-                
-                // Populate feature list
-                packageFeatureList.innerHTML = ''; // Clear existing list
+                packageFeatureList.innerHTML = ''; 
                 data.features.forEach(featureText => {
                     const li = document.createElement('li');
                     li.innerHTML = featureText;
                     packageFeatureList.appendChild(li);
                 });
-
-                // Update toggle buttons
                 plusBtn.classList.toggle('active', packageName === 'plus');
                 ultraBtn.classList.toggle('active', packageName === 'ultra');
             }
+            showPackage('plus'); // Initial package display
+            
+            // --- EVENT LISTENERS ---
+            menuToggle.addEventListener('click', () => { menuToggle.classList.toggle('active'); navLinks.classList.toggle('active'); });
 
-            function openModal(id) {
-                const data = modalData[id];
-                if (!data) return;
-                modalImageEl.src = data.image; 
-                modalImageEl.alt = data.alt;
-                modalTitle.textContent = data.title; 
-                modalText.innerHTML = data.text;
-                modalOverlay.classList.add('active'); 
-                document.body.style.overflow = 'hidden';
+            // --- CONVERSION LOGIC: CLICK HANDLING & FEEDBACK ---
+            document.querySelectorAll('.cta-section').forEach(section => {
+                section.addEventListener('click', (e) => {
+                    if (e.target.closest('a, button')) return;
+                    window.location.href = mainCtaUrl;
+                });
+            });
+            
+            document.querySelectorAll('.cta-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault(); 
+                    const originalText = this.innerHTML;
+                    this.innerHTML = 'Redirecting...';
+                    this.style.pointerEvents = 'none'; 
+                    setTimeout(() => {
+                        window.location.href = this.href;
+                    }, 300);
+                });
+            });
+
+            // --- CONVERSION LOGIC: EXIT-INTENT MODAL (DESKTOP & MOBILE) ---
+            let exitIntentShown = false;
+
+            function showExitIntent() {
+                if (!exitIntentShown) {
+                    exitIntentOverlay.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                    exitIntentShown = true;
+                    // For mobile back button, push a state to handle it correctly
+                    if (isMobile()) {
+                        history.pushState({modalOpen: true}, null);
+                    }
+                }
             }
-            function closeModal() {
-                modalOverlay.classList.remove('active'); 
+            function closeExitIntent() {
+                exitIntentOverlay.classList.remove('active');
                 document.body.style.overflow = 'auto';
             }
 
-            // --- EVENT LISTENERS ---
-            showPackage('plus'); // Initial package display
-            menuToggle.addEventListener('click', () => { menuToggle.classList.toggle('active'); navLinks.classList.toggle('active'); });
-            featureCards.forEach(card => card.addEventListener('click', () => openModal(card.getAttribute('data-modal-id'))));
-            closeBtn.addEventListener('click', closeModal);
-            modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) closeModal(); });
+            exitCloseBtn.addEventListener('click', closeExitIntent);
 
-            // --- GSAP ANIMATIONS (REFACTORED & STABLE) ---
+            // Desktop: Mouse leaving the window
+            document.body.addEventListener('mouseleave', (e) => {
+                 if (e.clientY <= 0) {
+                    showExitIntent();
+                }
+            });
+
+            // Mobile: Back button detection
+            function isMobile() {
+                return window.innerWidth <= 850;
+            }
+
+            // This logic creates a 'trap' for the back button on mobile.
+            // The first time the page loads, we add a dummy state.
+            // When the user hits back, 'popstate' fires, we show the modal and add another state.
+            // If they hit back again, it closes the modal.
+            // If they close the modal normally, we go back in history to remove the trap.
+            if (isMobile()) {
+                // Prime the history state
+                history.pushState({initial: true}, null);
+                
+                window.addEventListener('popstate', function(event) {
+                    if (!exitIntentShown) {
+                        // Prevent the default back action and show the modal
+                        history.pushState({modalOpen: true}, null);
+                        showExitIntent();
+                    }
+                });
+
+                exitCloseBtn.addEventListener('click', () => {
+                    if (history.state && history.state.modalOpen) {
+                        history.back();
+                    }
+                });
+            }
+
+            // --- GSAP ANIMATIONS ---
             gsap.registerPlugin(ScrollTrigger);
-
-            // Set initial states for all animated elements
             gsap.set('header', { y: -100, autoAlpha: 0 });
             gsap.set('.hero-logo-container', { scale: 0.5, autoAlpha: 0 });
             gsap.set('#hero h1, #hero p, .hero-buttons', { y: 30, autoAlpha: 0 });
             gsap.set('.g-fade-in', { y: 50, autoAlpha: 0 });
             gsap.set('.feature-card', { y: 50, autoAlpha: 0 });
 
-            // Hero entrance animation timeline
             const tl = gsap.timeline({ defaults: { ease: "power3.out", duration: 0.8 } });
-
             tl.to('header', { y: 0, autoAlpha: 1, duration: 1 })
               .to('.hero-logo-container', { scale: 1, autoAlpha: 1 }, "-=0.5")
               .to('#hero h1', { y: 0, autoAlpha: 1 }, "-=0.5")
               .to('#hero p', { y: 0, autoAlpha: 1 }, "-=0.6")
               .to('.hero-buttons', { y: 0, autoAlpha: 1 }, "-=0.7");
 
-            // Generic fade-in for sections on scroll
             gsap.utils.toArray('.g-fade-in').forEach(elem => {
-                gsap.to(elem, {
-                    autoAlpha: 1,
-                    y: 0,
-                    duration: 1,
-                    ease: "power3.out",
-                    scrollTrigger: {
-                        trigger: elem,
-                        start: "top 85%",
-                        toggleActions: "play none none none"
-                    }
-                });
+                gsap.to(elem, { autoAlpha: 1, y: 0, duration: 1, ease: "power3.out", scrollTrigger: { trigger: elem, start: "top 85%", toggleActions: "play none none none" } });
             });
 
-            // Staggered animation for feature cards
-            gsap.to(".feature-card", {
-                autoAlpha: 1,
-                y: 0,
-                duration: 0.6,
-                stagger: 0.15,
-                ease: "power3.out",
-                scrollTrigger: {
-                    trigger: ".features-grid",
-                    start: "top 80%",
-                    toggleActions: "play none none none"
-                }
-            });
+            gsap.to(".feature-card", { autoAlpha: 1, y: 0, duration: 0.6, stagger: 0.15, ease: "power3.out", scrollTrigger: { trigger: ".features-grid", start: "top 80%", toggleActions: "play none none none" } });
 
-            // GSAP FAQ Accordion Logic
             const faqItems = document.querySelectorAll('.faq-item');
             faqItems.forEach((item, index) => {
                 const question = item.querySelector('.faq-question');
                 const answer = item.querySelector('.faq-answer');
                 const icon = item.querySelector('.toggle-icon');
-                
                 gsap.set(answer, { height: 0 });
-
                 question.addEventListener('click', () => {
                     const isOpen = item.classList.contains('active');
-
                     faqItems.forEach((otherItem, otherIndex) => {
                         if (index !== otherIndex && otherItem.classList.contains('active')) {
                             otherItem.classList.remove('active');
@@ -509,7 +500,6 @@
                             gsap.to(otherItem.querySelector('.toggle-icon'), { rotation: 0, duration: 0.4, ease: 'power2.inOut' });
                         }
                     });
-
                     if (isOpen) {
                         item.classList.remove('active');
                         gsap.to(answer, { height: 0, duration: 0.4, ease: 'power2.inOut' });
