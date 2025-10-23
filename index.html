@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17666112132">
+<script async src="https://www.googagmanager.com/gtag/js?id=AW-17666112132">
 </script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -195,8 +195,30 @@
         
         /* Responsive Optimizations */
         @media (max-width: 850px) { .menu-toggle { display: flex; z-index: 10; } .nav-links { display: none; position: fixed; top: 0; right: 0; width: 70%; max-width: 300px; height: 100vh; background: var(--background-light); flex-direction: column; justify-content: center; align-items: center; transform: translateX(100%); transition: transform 0.3s ease-in-out; border-left: 1px solid var(--border-color); } .nav-links.active { display: flex; transform: translateX(0); } .nav-links li { margin: 20px 0; } .menu-toggle.active .bar:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); } .menu-toggle.active .bar:nth-child(2) { opacity: 0; } .menu-toggle.active .bar:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); } }
-        @media (max-width: 768px) { h2 { font-size: 2.1rem; } #hero h1 { font-size: 2.8rem; } #hero p { font-size: 1rem; } .hero-logo { max-width: 180px; } section { padding: 80px 0; } .package-content-wrapper { grid-template-columns: 1fr; gap: 40px; } }
-        @media (max-width: 480px) { .logo-img { height: 45px; } h2 { font-size: 1.8rem; } #hero h1 { font-size: 2.2rem; } .hero-logo { max-width: 150px; } .hero-buttons { display: flex; flex-direction: column; align-items: center; } .hero-buttons .btn { margin: 10px 0; width: 80%; } }
+        
+        @media (max-width: 768px) { 
+            /* MOBILE OPTIMIZATION */
+            body, p { font-size: 0.95rem; /* Makes body text slightly smaller */ }
+            h2 { font-size: 2.0rem; /* Was 2.1rem */ } 
+            #hero h1 { font-size: 2.5rem; /* Was 2.8rem */ } 
+            #hero p { font-size: 1rem; } 
+            .hero-logo { max-width: 180px; } 
+            section { padding: 80px 0; } 
+            .package-content-wrapper { grid-template-columns: 1fr; gap: 40px; } 
+        }
+
+        @media (max-width: 480px) { 
+            /* MOBILE OPTIMIZATION */
+            .logo-img { height: 45px; } 
+            h2 { font-size: 1.7rem; /* Was 1.8rem */ } 
+            #hero h1 { font-size: 2.0rem; /* Was 2.2rem */ } 
+            #hero p { font-size: 0.9rem; }
+            .hero-logo { max-width: 140px; /* Was 150px */ } 
+            .hero-buttons { display: flex; flex-direction: column; align-items: center; } 
+            .hero-buttons .btn { margin: 10px 0; width: 80%; } 
+            .btn { padding: 10px 22px; /* Makes buttons less chunky */ }
+            section { padding: 60px 0; /* Reduces vertical spacing */ }
+        }
     </style>
     <!-- Schema Markup... -->
 </head>
@@ -208,7 +230,7 @@
                 <a href="#hero" class="logo"><img src="https://res.cloudinary.com/db0fbc9ej/image/upload/v1753737911/IMG-20250728-WA0148df-removebg-preview_1_e7eiqe.png" alt="MiAmor Official Logo" class="logo-img"></a>
                 <div class="nav-controls">
                     <ul class="nav-links">
-                        <li><a href="#about">About</a></li><li><a href="#packages">Plans</a></li><li><a href="#features">Features</a></li><li><a href="https://t.me/+2349168950653?phone=2349168950653&text=I'm%20ready%20to%20know%20more%20about%20MIAMOR%20and%20Purchase%20coupon%20code%20for%20Registration" class="btn cta-link">Join Community</a></li>
+                        <li><a href="#about">About</a></li><li><a href="#packages">Plans</a></li><li><a href="#features">Features</a></li><li><a href="https://t.me/Miamorplatform1?text=I'm%20ready%20to%20know%20more%20about%20MIAMOR%20and%20Purchase%20coupon%20code%20for%20Registration" class="btn cta-link">Join Community</a></li>
                     </ul>
                     <div class="menu-toggle"><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
                 </div>
@@ -222,7 +244,7 @@
                 <div class="hero-logo-container"><img src="https://res.cloudinary.com/db0fbc9ej/image/upload/v1753737911/IMG-20250728-WA0148df-removebg-preview_1_e7eiqe.png" alt="Animated MiAmor Logo with Pulse Effect" class="hero-logo"></div>
                 <h1>Build Connections, Unlock Potential,<br>Join the MiAmor Community <span class="hero-hearts">💙</span></h1>
                 <p>A dynamic platform dedicated to fostering meaningful connections, personal growth, and valuable networking opportunities. Discover a community that supports your ambitions.</p>
-                <div class="hero-buttons"><a href="https://t.me/+2349168950653?phone=2349168950653&text=I'm%20ready%20to%20know%20more%20about%20MIAMOR%20and%20Purchase%20coupon%20code%20for%20Registration" class="btn cta-link">Join Our Community</a><a href="#packages" class="btn btn-outline">Learn More</a></div>
+                <div class="hero-buttons"><a href="https://t.me/Miamorplatform1?text=I'm%20ready%20to%20know%20more%20about%20MIAMOR%20and%20Purchase%20coupon%20code%20for%20Registration" class="btn cta-link">Join Our Community</a><a href="#packages" class="btn btn-outline">Learn More</a></div>
             </div>
         </section>
 
@@ -247,7 +269,7 @@
                         <ul id="package-feature-list">
                             <!-- Features will be dynamically inserted here -->
                         </ul>
-                        <div class="package-cta"><a href="https://t.me/+2349168950653?phone=2349168950653&text=I'm%20ready%20to%20know%20more%20about%20MIAMOR%20and%20Purchase%20coupon%20code%20for%20Registration" class="btn cta-link">Choose Your Plan</a></div>
+                        <div class="package-cta"><a href="https://t.me/Miamorplatform1?text=I'm%20ready%20to%20know%20more%20about%20MIAMOR%20and%20Purchase%20coupon%20code%20for%20Registration" class="btn cta-link">Choose Your Plan</a></div>
                     </div>
                 </div>
             </div>
@@ -270,7 +292,7 @@
                 <div class="cta-content g-fade-in">
                     <h2>Ready to Join Our Community?</h2>
                     <p>To get started, simply purchase a membership activation code. Your one-time activation fee unlocks all the benefits of your chosen plan. Click below to connect with an agent and get your code.</p>
-                    <a href="https://t.me/+2349168950653?phone=2349168950653&text=I'm%20ready%20to%20know%20more%20about%20MIAMOR%20and%20Purchase%20coupon%20code%20for%20Registration" class="btn cta-link">Get Your Activation Code >>></a>
+                    <a href="https://t.me/Miamorplatform1?text=I'm%20ready%20to%20know%20more%20about%20MIAMOR%20and%20Purchase%20coupon%20code%20for%20Registration" class="btn cta-link">Get Your Activation Code >>></a>
                 </div>
             </div>
         </section>
@@ -325,7 +347,7 @@
             <span class="exit-close-btn">×</span>
             <h2>Wait! Don't Leave...</h2>
             <p>Your journey to new connections and skills is just one click away. Join the MiAmor community now!</p>
-            <a href="https://t.me/+2349168950653?phone=2349168950653&text=I'm%20ready%20to%20know%20more%20about%20MIAMOR%20and%20Purchase%20coupon%20code%20for%20Registration" class="btn cta-link">Get My Code & Join</a>
+            <a href="https://t.me/Miamorplatform1?text=I'm%20ready%20to%20know%20more%20about%20MIAMOR%20and%20Purchase%20coupon%20code%20for%20Registration" class="btn cta-link">Get My Code & Join</a>
         </div>
     </div>
     
@@ -359,7 +381,7 @@
         };
 
         document.addEventListener('DOMContentLoaded', () => {
-            const mainCtaUrl = "https://t.me/+2349168950653?phone=2349168950653&text=I'm%20ready%20to%20know%20more%20about%20MIAMOR%20and%20Purchase%20coupon%20code%20for%20Registration";
+            const mainCtaUrl = "https://t.me/Miamorplatform1?text=I'm%20ready%20to%20know%20more%20about%20MIAMOR%20and%20Purchase%20coupon%20code%20for%20Registration";
 
             // --- UI ELEMENTS ---
             const menuToggle = document.querySelector('.menu-toggle');
@@ -440,18 +462,11 @@
                 return window.innerWidth <= 850;
             }
 
-            // This logic creates a 'trap' for the back button on mobile.
-            // The first time the page loads, we add a dummy state.
-            // When the user hits back, 'popstate' fires, we show the modal and add another state.
-            // If they hit back again, it closes the modal.
-            // If they close the modal normally, we go back in history to remove the trap.
             if (isMobile()) {
-                // Prime the history state
                 history.pushState({initial: true}, null);
                 
                 window.addEventListener('popstate', function(event) {
                     if (!exitIntentShown) {
-                        // Prevent the default back action and show the modal
                         history.pushState({modalOpen: true}, null);
                         showExitIntent();
                     }
