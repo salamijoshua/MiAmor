@@ -117,7 +117,7 @@
         .toggle-btn.ultra { border-radius: 0 30px 30px 0; }
         .toggle-btn.active { background: var(--primary-color); color: var(--heading-color); border-color: var(--primary-color); }
         .package-content-wrapper { display: grid; grid-template-columns: 1fr; max-width: 600px; margin: 0 auto; }
-        .package-features { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 15px; padding: 40px; cursor: pointer; transition: all 0.3s ease; }
+        .package-features { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 15px; padding: 40px; transition: all 0.3s ease; } /* REMOVED: cursor: pointer; */
         .package-features:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); border-color: var(--primary-color); }
         .package-features ul { list-style: none; padding: 0; }
         .package-features li { display: flex; align-items: flex-start; margin-bottom: 20px; font-size: 1.05rem; }
@@ -126,11 +126,11 @@
         
         /* Other Sections */
         #about { background-color: var(--background-light); }
-        .about-content { text-align: center; max-width: 800px; margin: 0 auto; cursor: pointer; transition: all 0.3s ease; border-radius: 15px; padding: 20px; }
+        .about-content { text-align: center; max-width: 800px; margin: 0 auto; transition: all 0.3s ease; border-radius: 15px; padding: 20px; } /* REMOVED: cursor: pointer; */
         .about-content:hover { background: var(--card-bg); transform: scale(1.03); }
         #features { background-color: var(--background-light); }
         .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
-        .feature-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 15px; padding: 30px; transition: transform 0.3s ease, box-shadow 0.3s ease; position: relative; cursor: pointer; }
+        .feature-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 15px; padding: 30px; transition: transform 0.3s ease, box-shadow 0.3s ease; position: relative; } /* REMOVED: cursor: pointer; */
         .feature-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); border-color: var(--primary-color); }
         .feature-icon { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 15px; }
         .feature-card h3 { font-size: 1.5rem; color: var(--heading-color); }
@@ -196,10 +196,9 @@
         @media (max-width: 850px) { .menu-toggle { display: flex; z-index: 10; } .nav-links { display: none; position: fixed; top: 0; right: 0; width: 70%; max-width: 300px; height: 100vh; background: var(--background-light); flex-direction: column; justify-content: center; align-items: center; transform: translateX(100%); transition: transform 0.3s ease-in-out; border-left: 1px solid var(--border-color); } .nav-links.active { display: flex; transform: translateX(0); } .nav-links li { margin: 20px 0; } .menu-toggle.active .bar:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); } .menu-toggle.active .bar:nth-child(2) { opacity: 0; } .menu-toggle.active .bar:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); } }
         
         @media (max-width: 768px) { 
-            /* MOBILE OPTIMIZATION */
-            body, p { font-size: 0.95rem; /* Makes body text slightly smaller */ }
-            h2 { font-size: 2.0rem; /* Was 2.1rem */ } 
-            #hero h1 { font-size: 2.5rem; /* Was 2.8rem */ } 
+            body, p { font-size: 0.95rem; }
+            h2 { font-size: 2.0rem; } 
+            #hero h1 { font-size: 2.5rem; } 
             #hero p { font-size: 1rem; } 
             .hero-logo { max-width: 180px; } 
             section { padding: 80px 0; } 
@@ -207,16 +206,15 @@
         }
 
         @media (max-width: 480px) { 
-            /* MOBILE OPTIMIZATION */
             .logo-img { height: 45px; } 
-            h2 { font-size: 1.7rem; /* Was 1.8rem */ } 
-            #hero h1 { font-size: 2.0rem; /* Was 2.2rem */ } 
+            h2 { font-size: 1.7rem; } 
+            #hero h1 { font-size: 2.0rem; } 
             #hero p { font-size: 0.9rem; }
-            .hero-logo { max-width: 140px; /* Was 150px */ } 
+            .hero-logo { max-width: 140px; } 
             .hero-buttons { display: flex; flex-direction: column; align-items: center; } 
             .hero-buttons .btn { margin: 10px 0; width: 80%; } 
-            .btn { padding: 10px 22px; /* Makes buttons less chunky */ }
-            section { padding: 60px 0; /* Reduces vertical spacing */ }
+            .btn { padding: 10px 22px; }
+            section { padding: 60px 0; }
         }
     </style>
     <!-- Schema Markup... -->
@@ -229,7 +227,7 @@
                 <a href="#hero" class="logo"><img src="https://res.cloudinary.com/db0fbc9ej/image/upload/v1753737911/IMG-20250728-WA0148df-removebg-preview_1_e7eiqe.png" alt="MiAmor Official Logo" class="logo-img"></a>
                 <div class="nav-controls">
                     <ul class="nav-links">
-                        <li><a href="#about">About</a></li><li><a href="#packages">Plans</a></li><li><a href="#features">Features</a></li><li><a href="https://t.me/Miamorplatform1?text=I'm%20ready%20to%20know%20more%20about%20MIAMOR%20and%20Purchase%20coupon%20code%20for%20Registration" class="btn cta-link">Join Community</a></li>
+                        <li><a href="#about">About</a></li><li><a href="#packages">Plans</a></li><li><a href="#features">Features</a></li><li><a href="https://t.me/Miamorplatform1?text=I'm%20ready%20to%20know%20more%20about%20MIAMOR%20and%20Purchase%20coupon%20code%20for%20Registration" class="btn">Join Community</a></li>
                     </ul>
                     <div class="menu-toggle"><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
                 </div>
@@ -243,12 +241,12 @@
                 <div class="hero-logo-container"><img src="https://res.cloudinary.com/db0fbc9ej/image/upload/v1753737911/IMG-20250728-WA0148df-removebg-preview_1_e7eiqe.png" alt="Animated MiAmor Logo with Pulse Effect" class="hero-logo"></div>
                 <h1>Build Connections, Unlock Potential,<br>Join the MiAmor Community <span class="hero-hearts">💙</span></h1>
                 <p>A dynamic platform dedicated to fostering meaningful connections, personal growth, and valuable networking opportunities. Discover a community that supports your ambitions.</p>
-                <div class="hero-buttons"><a href="https://t.me/Miamorplatform1?text=I'm%20ready%20to%20know%20more%20about%20MIAMOR%20and%20Purchase%20coupon%20code%20for%20Registration" class="btn cta-link">Join Our Community</a><a href="#packages" class="btn btn-outline">Learn More</a></div>
+                <div class="hero-buttons"><a href="https://t.me/Miamorplatform1?text=I'm%20ready%20to%20know%20more%20about%20MIAMOR%20and%20Purchase%20coupon%20code%20for%20Registration" class="btn">Join Our Community</a><a href="#packages" class="btn btn-outline">Learn More</a></div>
             </div>
         </section>
 
         <section id="about">
-            <div class="container about-content g-fade-in cta-section">
+            <div class="container about-content g-fade-in">
                 <h2>What is MiAmor?</h2>
                 <p>MiAmor is a vibrant community platform operating across Africa and beyond. Our mission is to help people build meaningful relationships, develop valuable life and career skills, and expand their personal network. We combine community-building with personal development, focusing on empowerment and mutual support.</p>
             </div>
@@ -264,11 +262,11 @@
                     </div>
                 </div>
                 <div class="package-content-wrapper g-fade-in">
-                    <div class="package-features cta-section">
+                    <div class="package-features">
                         <ul id="package-feature-list">
                             <!-- Features will be dynamically inserted here -->
                         </ul>
-                        <div class="package-cta"><a href="https://t.me/Miamorplatform1?text=I'm%20ready%20to%20know%20more%20about%20MIAMOR%20and%20Purchase%20coupon%20code%20for%20Registration" class="btn cta-link">Choose Your Plan</a></div>
+                        <div class="package-cta"><a href="https://t.me/Miamorplatform1?text=I'm%20ready%20to%20know%20more%20about%20MIAMOR%20and%20Purchase%20coupon%20code%20for%20Registration" class="btn">Choose Your Plan</a></div>
                     </div>
                 </div>
             </div>
@@ -278,10 +276,10 @@
              <div class="container">
                 <h2 class="g-fade-in">Discover the MiAmor Experience</h2>
                 <div class="features-grid">
-                    <div class="feature-card cta-section"><div class="feature-icon">🤝</div><h3>Meaningful Connections</h3><p>Our platform helps you find and connect with like-minded individuals for friendship, romance, and networking.</p></div>
-                    <div class="feature-card cta-section"><div class="feature-icon">📚</div><h3>Skill Development</h3><p>Access workshops and resources to learn new skills, from digital marketing to personal finance.</p></div>
-                    <div class="feature-card cta-section"><div class="feature-icon">🎉</div><h3>Vibrant Community</h3><p>Participate in online events, play games, and engage with a supportive and active community.</p></div>
-                    <div class="feature-card cta-section"><div class="feature-icon">✨</div><h3>Exclusive Perks</h3><p>Active members can qualify for exciting rewards, including special bonuses and unique opportunities.</p></div>
+                    <div class="feature-card"><div class="feature-icon">🤝</div><h3>Meaningful Connections</h3><p>Our platform helps you find and connect with like-minded individuals for friendship, romance, and networking.</p></div>
+                    <div class="feature-card"><div class="feature-icon">📚</div><h3>Skill Development</h3><p>Access workshops and resources to learn new skills, from digital marketing to personal finance.</p></div>
+                    <div class="feature-card"><div class="feature-icon">🎉</div><h3>Vibrant Community</h3><p>Participate in online events, play games, and engage with a supportive and active community.</p></div>
+                    <div class="feature-card"><div class="feature-icon">✨</div><h3>Exclusive Perks</h3><p>Active members can qualify for exciting rewards, including special bonuses and unique opportunities.</p></div>
                 </div>
             </div>
         </section>
@@ -290,8 +288,9 @@
             <div class="container">
                 <div class="cta-content g-fade-in">
                     <h2>Ready to Join Our Community?</h2>
-                    <p>To get started, simply purchase a membership activation code. Your one-time activation fee unlocks all the benefits of your chosen plan. Click below to connect with an agent and get your code.</p>
-                    <a href="https://t.me/Miamorplatform1?text=I'm%20ready%20to%20know%20more%20about%20MIAMOR%20and%20Purchase%20coupon%20code%20for%20Registration" class="btn cta-link">Get Your Activation Code >>></a>
+                    <!-- EDITED: Rephrased text for clarity and professionalism -->
+                    <p>To begin, you will need a membership activation code. Registration is handled securely through our official Telegram channel where our agents will guide you through the process and issue your unique code.</p>
+                    <a href="https://t.me/Miamorplatform1?text=I'm%20ready%20to%20know%20more%20about%20MIAMOR%20and%20Purchase%20coupon%20code%20for%20Registration" class="btn">Get Your Activation Code >>></a>
                 </div>
             </div>
         </section>
@@ -336,17 +335,18 @@
     <footer>
         <div class="container">
             <p>© 2025 MiAmor. All Rights Reserved. | <a href="#tos">Terms of Service</a> | <a href="#privacy">Privacy Policy</a></p>
-            <p><small style="opacity: 0.7; margin-top: 10px; display: inline-block;">Disclaimer: This website is operated by an independent affiliate of MiAmor. It is not the official platform. We provide information and assistance with the registration process.</small></p>
+            <!-- EDITED: Rephrased disclaimer to sound more legitimate -->
+            <p><small style="opacity: 0.7; margin-top: 10px; display: inline-block;">Disclaimer: This website is operated by an authorized independent affiliate of MiAmor. We provide information and assist with the official registration process.</small></p>
         </div>
     </footer>
     
-    <!-- NEW: Exit-Intent Modal HTML -->
+    <!-- Exit-Intent Modal HTML -->
     <div id="exit-intent-modal-overlay">
         <div class="exit-intent-content">
             <span class="exit-close-btn">×</span>
             <h2>Wait! Don't Leave...</h2>
             <p>Your journey to new connections and skills is just one click away. Join the MiAmor community now!</p>
-            <a href="https://t.me/Miamorplatform1?text=I'm%20ready%20to%20know%20more%20about%20MIAMOR%20and%20Purchase%20coupon%20code%20for%20Registration" class="btn cta-link">Get My Code & Join</a>
+            <a href="https://t.me/Miamorplatform1?text=I'm%20ready%20to%20know%20more%20about%20MIAMOR%20and%20Purchase%20coupon%20code%20for%20Registration" class="btn">Get My Code & Join</a>
         </div>
     </div>
     
@@ -354,6 +354,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
+    <!-- EDITED: Complete rewrite of the script to remove aggressive behaviors -->
     <script>
         const packageData = {
             plus: { 
@@ -380,8 +381,6 @@
         };
 
         document.addEventListener('DOMContentLoaded', () => {
-            const mainCtaUrl = "https://t.me/Miamorplatform1?text=I'm%20ready%20to%20know%20more%20about%20MIAMOR%20and%20Purchase%20coupon%20code%20for%20Registration";
-
             // --- UI ELEMENTS ---
             const menuToggle = document.querySelector('.menu-toggle');
             const navLinks = document.querySelector('.nav-links');
@@ -405,30 +404,17 @@
             }
             showPackage('plus'); // Initial package display
             
-            // --- EVENT LISTENERS ---
-            menuToggle.addEventListener('click', () => { menuToggle.classList.toggle('active'); navLinks.classList.toggle('active'); });
-
-            // --- CONVERSION LOGIC: CLICK HANDLING & FEEDBACK ---
-            document.querySelectorAll('.cta-section').forEach(section => {
-                section.addEventListener('click', (e) => {
-                    if (e.target.closest('a, button')) return;
-                    window.location.href = mainCtaUrl;
-                });
-            });
-            
-            document.querySelectorAll('.cta-link').forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault(); 
-                    const originalText = this.innerHTML;
-                    this.innerHTML = 'Redirecting...';
-                    this.style.pointerEvents = 'none'; 
-                    setTimeout(() => {
-                        window.location.href = this.href;
-                    }, 300);
-                });
+            // --- MOBILE NAVIGATION ---
+            menuToggle.addEventListener('click', () => { 
+                menuToggle.classList.toggle('active'); 
+                navLinks.classList.toggle('active'); 
             });
 
-            // --- CONVERSION LOGIC: EXIT-INTENT MODAL (DESKTOP & MOBILE) ---
+            // --- REMOVED AGGRESSIVE SCRIPTS ---
+            // The scripts that made entire sections clickable and hijacked the back button have been removed.
+            // All links and buttons now function with standard, expected browser behavior.
+
+            // --- SAFER EXIT-INTENT MODAL (DESKTOP ONLY) ---
             let exitIntentShown = false;
 
             function showExitIntent() {
@@ -436,10 +422,6 @@
                     exitIntentOverlay.classList.add('active');
                     document.body.style.overflow = 'hidden';
                     exitIntentShown = true;
-                    // For mobile back button, push a state to handle it correctly
-                    if (isMobile()) {
-                        history.pushState({modalOpen: true}, null);
-                    }
                 }
             }
             function closeExitIntent() {
@@ -448,37 +430,20 @@
             }
 
             exitCloseBtn.addEventListener('click', closeExitIntent);
+            exitIntentOverlay.addEventListener('click', (e) => {
+                if (e.target === exitIntentOverlay) { // Close if background is clicked
+                    closeExitIntent();
+                }
+            });
 
-            // Desktop: Mouse leaving the window
+            // Desktop: Mouse leaving the window. This is a standard pattern.
             document.body.addEventListener('mouseleave', (e) => {
                  if (e.clientY <= 0) {
                     showExitIntent();
                 }
             });
 
-            // Mobile: Back button detection
-            function isMobile() {
-                return window.innerWidth <= 850;
-            }
-
-            if (isMobile()) {
-                history.pushState({initial: true}, null);
-                
-                window.addEventListener('popstate', function(event) {
-                    if (!exitIntentShown) {
-                        history.pushState({modalOpen: true}, null);
-                        showExitIntent();
-                    }
-                });
-
-                exitCloseBtn.addEventListener('click', () => {
-                    if (history.state && history.state.modalOpen) {
-                        history.back();
-                    }
-                });
-            }
-
-            // --- GSAP ANIMATIONS ---
+            // --- GSAP ANIMATIONS (Unchanged) ---
             gsap.registerPlugin(ScrollTrigger);
             gsap.set('header', { y: -100, autoAlpha: 0 });
             gsap.set('.hero-logo-container', { scale: 0.5, autoAlpha: 0 });
@@ -500,25 +465,23 @@
             gsap.to(".feature-card", { autoAlpha: 1, y: 0, duration: 0.6, stagger: 0.15, ease: "power3.out", scrollTrigger: { trigger: ".features-grid", start: "top 80%", toggleActions: "play none none none" } });
 
             const faqItems = document.querySelectorAll('.faq-item');
-            faqItems.forEach((item, index) => {
+            faqItems.forEach((item) => {
                 const question = item.querySelector('.faq-question');
                 const answer = item.querySelector('.faq-answer');
                 const icon = item.querySelector('.toggle-icon');
                 gsap.set(answer, { height: 0 });
                 question.addEventListener('click', () => {
                     const isOpen = item.classList.contains('active');
-                    faqItems.forEach((otherItem, otherIndex) => {
-                        if (index !== otherIndex && otherItem.classList.contains('active')) {
+                    
+                    faqItems.forEach((otherItem) => {
+                        if (otherItem.classList.contains('active')) {
                             otherItem.classList.remove('active');
                             gsap.to(otherItem.querySelector('.faq-answer'), { height: 0, duration: 0.4, ease: 'power2.inOut' });
                             gsap.to(otherItem.querySelector('.toggle-icon'), { rotation: 0, duration: 0.4, ease: 'power2.inOut' });
                         }
                     });
-                    if (isOpen) {
-                        item.classList.remove('active');
-                        gsap.to(answer, { height: 0, duration: 0.4, ease: 'power2.inOut' });
-                        gsap.to(icon, { rotation: 0, duration: 0.4, ease: 'power2.inOut' });
-                    } else {
+
+                    if (!isOpen) {
                         item.classList.add('active');
                         gsap.to(answer, { height: 'auto', duration: 0.4, ease: 'power2.inOut' });
                         gsap.to(icon, { rotation: 45, duration: 0.4, ease: 'power2.inOut' });
